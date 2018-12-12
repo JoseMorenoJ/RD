@@ -19,7 +19,7 @@ namespace RecklessDriver {
 		void EndGame();
 
 	private:
-		int _cash;
+		int _cash; //Total cash accumulated
 
 	};
 }

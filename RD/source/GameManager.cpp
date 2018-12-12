@@ -4,20 +4,19 @@
 */
 #include <iostream>
 
+#include "Globals.h"
 #include "GameManager.h"
 #include "PlayerVehicle.h"
 #include "Player.h"
 
+
 namespace RecklessDriver {
 
 	//default Constructor
-	GameManager::GameManager()
-	{}
+	GameManager::GameManager(){}
 
 	//default Destructor
-	GameManager::~GameManager()
-	{
-	}
+	GameManager::~GameManager(){}
 
 	//Getter to _cash. This cash is the total cash that the player has accumulated.
 	int GameManager::GetCash() const
@@ -35,21 +34,30 @@ namespace RecklessDriver {
 	void GameManager::NewGame()
 	{
 		//Choose a vehicle
-		PlayerVehicle * pVehicle = new PlayerVehicle("Sedan", 5, 70, 4);
-		//create a player object
-		Player *pPlayer = new Player(100, pVehicle);
-		//prepare te scenary
+		PlayerVehicle * pVehicle = new PlayerVehicle(
+			"Sedan", Globals::SEDAN_HANDLING, Globals::SEDAN_TOPSPEED, Globals::SEDAN_STRENGTH);
+		//Create a player object
+		Player *pPlayer = new Player(Globals::PLAYER_INIT_HEALTH, pVehicle);
+		//Prepare te scenary (Scene Object?)
 
 		//Run a loop
 		while (pPlayer->IsAlive())
 		{
 			//Generate objects (side, traffic...)
 
-			//collisions
+			//Collisions
+				//with side object
+				//with traffic vehicle
 		}
 		//Until health is lower or equal than zero.
 
+		//Destroy the Scene and the objects.
+
 		//End of the game (run the EndGame() function)
+
+		//Show result
+
+		//Play again?
 
 		return;
 	}
@@ -57,6 +65,6 @@ namespace RecklessDriver {
 	//This print out the scores info once the game is over.
 	void GameManager::EndGame()
 	{
-		std::cout << "Total cash accumulated: " << this->_cash << std::endl;
+		std::cout << "Total cash accumulated: " << this->GetCash() << std::endl;
 	}
 }

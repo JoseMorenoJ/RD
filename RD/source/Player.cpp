@@ -27,10 +27,10 @@ namespace RecklessDriver {
 	}
 
 	//Mouvement for the player relates directly with the Player Vehicle mouvement functions.
-	void Player::Accelerate() { this->_pVehicle->Up; }
-	void Player::Brake() { this->_pVehicle->Down; }
-	void Player::SteerRight() { this->_pVehicle->Right; }
-	void Player::SteerLeft() { this->_pVehicle->Left; }
+	void Player::Accelerate() { this->_pVehicle->Up(); }
+	void Player::Brake() { this->_pVehicle->Down(); }
+	void Player::SteerRight() { this->_pVehicle->Right(); }
+	void Player::SteerLeft() { this->_pVehicle->Left(); }
 
 	//Called when player collides with another object
 	void Player::ApplyDamage(int damage, int cash)
