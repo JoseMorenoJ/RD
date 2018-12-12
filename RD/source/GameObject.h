@@ -29,9 +29,9 @@ namespace RecklessDriver {
 		virtual void OnCollision(const GameObject &other);
 
 	private:
-		std::string name; //To uniquely identify a game object
-		std::string tag;  //To uniquely identify a group of objects
-		bool enabled;	  //Wether is enabled or disabled
+		std::string _name; //To uniquely identify a game object
+		std::string _tag;  //To uniquely identify a group of objects
+		bool _enabled;	  //Wether is enabled or disabled
 	};
 
 } //namespace RecklessDriver

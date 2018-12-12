@@ -1,4 +1,8 @@
 #pragma once
+/*
+	class Sedan: behaviour of the traffic car type Sedan.
+		Inherits from TrafficCar.
+*/
 
 #include "TrafficCar.h"
 
