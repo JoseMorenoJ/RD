@@ -1,6 +1,6 @@
 #pragma once
 /*
-	class FireHydrant: behaviour of the side object of the type fire hydrant.
+	class LetterBox: behaviour of the side object of the type letter box.
 		Inherits from SideObject.
 */
 
@@ -8,16 +8,17 @@
 
 namespace RecklessDriver {
 
-	class FireHydrant :
+	class LetterBox :
 		public SideObject
 	{
 	public:
-		FireHydrant(int damage, int cash);
-		~FireHydrant();
+		LetterBox(int damage, int cash);
+		~LetterBox();
 
 		void OnCollision(const GameObject &other) override;
 
 	private:
-		void Fountain();
+		void LettersFlying();
+
 	};
-}//namespace RecklessDriver
+}

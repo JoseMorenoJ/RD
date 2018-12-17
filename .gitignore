@@ -4,3 +4,4 @@
 *.filters
 *.sln
 RD/Debug/
+Debug/

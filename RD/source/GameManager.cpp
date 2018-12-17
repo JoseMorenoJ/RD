@@ -3,11 +3,13 @@
 		game process.
 */
 #include <iostream>
+#include <thread>
 
-#include "Globals.h"
+//#include "Globals.h" //int RecklessDriver::Globals::N_TRAFFIC_TYPES" (?N_TRAFFIC_TYPES@Globals@RecklessDriver@@3HA) déjà défini(e) dans GameManager.obj
 #include "GameManager.h"
 #include "PlayerVehicle.h"
 #include "Player.h"
+#include "Scene.h"
 
 
 namespace RecklessDriver {
@@ -24,6 +26,14 @@ namespace RecklessDriver {
 		return this->_cash;
 	}
 
+	//Get the instance of the game manager to be able to accumulate the cash.
+	GameManager& GameManager::GetInstance()
+	{
+		//Meyer's Singleton
+		static GameManager instance;
+		return instance;
+	}
+
 	//Add some amount to the total cash.
 	void GameManager::AddCash(int amount)
 	{
@@ -33,21 +43,34 @@ namespace RecklessDriver {
 	//This will generate the new game. Here there is the main logic of the game.
 	void GameManager::NewGame()
 	{
+		//TODO: Redesign the Global variables thing.
+		const int SEDAN_HANDLING = 5;
+		const int SEDAN_TOPSPEED = 70;
+		const int SEDAN_STRENGTH = 4;
+		const int PLAYER_INIT_HEALTH = 100;
 		//Choose a vehicle
 		PlayerVehicle * pVehicle = new PlayerVehicle(
-			"Sedan", Globals::SEDAN_HANDLING, Globals::SEDAN_TOPSPEED, Globals::SEDAN_STRENGTH);
+			"Sedan", SEDAN_HANDLING, SEDAN_TOPSPEED, SEDAN_STRENGTH);
 		//Create a player object
-		Player *pPlayer = new Player(Globals::PLAYER_INIT_HEALTH, pVehicle);
+		Player *pPlayer = new Player(PLAYER_INIT_HEALTH, pVehicle);
 		//Prepare te scenary (Scene Object?)
-
+		Scene scene;
+		scene.Start(pPlayer);
 		//Run a loop
 		while (pPlayer->IsAlive())
 		{
 			//Generate objects (side, traffic...)
+			scene.GenerateNPCs();
+			this->Drive();
 
-			//Collisions
-				//with side object
-				//with traffic vehicle
+			//Clear the screen
+			system("cls");
+			
+			//Generate the collisions
+			scene.Collide();
+
+			//Show player's money and health
+			this->ShowStats(pPlayer);
 		}
 		//Until health is lower or equal than zero.
 
@@ -66,5 +89,22 @@ namespace RecklessDriver {
 	void GameManager::EndGame()
 	{
 		std::cout << "Total cash accumulated: " << this->GetCash() << std::endl;
+	}
+
+	//Show the health points and the accumulated money of the player in the screen.
+	void GameManager::ShowStats(Player * pPlayer)
+	{
+		std::cout << "\n***************************************** Cash: ";
+		std::cout << this->_cash << "$\tHealth: " << pPlayer->GetHealth() << std::endl;
+	}
+	void GameManager::Drive()
+	{
+		std::cout << "\nPlayer is driving\n";
+		for (int i = 0; i<8; ++i)
+		{
+			std::cout << ".";
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		}
+		std::cout << std::endl;
 	}
 }

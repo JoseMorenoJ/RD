@@ -7,8 +7,14 @@
 
 namespace RecklessDriver {
 	
-	//default Constructor
-	SideObject::SideObject(){}
+	//Constructor
+	SideObject::SideObject(int damage, int cash)
+		:_damage(damage)
+		, _cash(cash)
+		, _count(0)
+	{
+		SetName("Side Object");
+	}
 	
 	//default Destructor
 	SideObject::~SideObject(){}

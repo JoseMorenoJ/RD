@@ -17,6 +17,10 @@ namespace RecklessDriver {
 		
 		int GetDamage() const;
 		int GetCash() const;
+	
+	protected:
+		void Sparks();
+	
 	private:
 		int _damage; //the damage to the player car
 		int _cash;	 //cash given after crash

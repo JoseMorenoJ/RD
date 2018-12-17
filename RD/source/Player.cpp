@@ -4,6 +4,7 @@
 */
 
 #include "Player.h"
+#include "GameManager.h"
 
 namespace RecklessDriver {
 
@@ -11,12 +12,16 @@ namespace RecklessDriver {
 	Player::Player(int health, PlayerVehicle * pVehicle)
 		: _health(health)
 		, _pVehicle(pVehicle)
-	{}
+	{
+		this->SetName("Player");
+	}
 
 	//default Destructor
 	Player::~Player()
 	{
 	}
+	//GetHealth:
+	int Player::GetHealth() { return this->_health; }
 
 	//Check on the players health.
 	bool Player::IsAlive() const 
@@ -36,6 +41,7 @@ namespace RecklessDriver {
 	void Player::ApplyDamage(int damage, int cash)
 	{
 		this->_health -= damage - this->_pVehicle->GetStrength();
+		GameManager::GetInstance().AddCash(cash);
 	}
 
 }

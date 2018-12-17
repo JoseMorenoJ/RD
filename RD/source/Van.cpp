@@ -1,28 +1,28 @@
 /*
-	class Sedan: behaviour of the traffic car type Sedan.
+	class Van: behaviour of the traffic car type Van.
 		Inherits from TrafficCar.
 */
 
 #include <iostream>
 
-#include "Sedan.h"
+#include "Van.h"
 #include "Player.h"
 
 namespace RecklessDriver {
 
 	//This initializes the values with the constructor from TrafficCar
-	Sedan::Sedan(int damage, int cash):TrafficCar(damage, cash) 
+	Van::Van(int damage, int cash) :TrafficCar(damage, cash) 
 	{
-		SetName("Sedan");
+		SetName("Van");
 	}
 
 	//default Destructor
-	Sedan::~Sedan(){}
+	Van::~Van() {}
 
-	void Sedan::OnCollision(const GameObject &other)
+	void Van::OnCollision(const GameObject &other)
 	{
 		Player &p = (Player&)other;
-		std::cout << "### COLLISION -> Sedan" << std::endl;
+		std::cout << "### COLLISION -> Van" << std::endl;
 		p.ApplyDamage(this->GetDamage(), this->GetCash());
 		this->Sparks();
 		return;

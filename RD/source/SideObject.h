@@ -12,7 +12,7 @@ namespace RecklessDriver {
 		public GameObject
 	{
 	public:
-		SideObject();
+		SideObject(int damage, int cash);
 		~SideObject();
 
 		void SetDamage(int);
@@ -23,10 +23,12 @@ namespace RecklessDriver {
 		int GetCash() const;
 		int GetCount() const;
 
+	protected:
+		int _count;  //count of consecutive crashes with the side object
+
 	private:
 		int _damage; //damage done to the players car
 		int _cash;	//cash given to the player after the first crash
-		int _count;  //count of consecutive crashes with the side object
 
 	};
 }//namespace RecklessDriver

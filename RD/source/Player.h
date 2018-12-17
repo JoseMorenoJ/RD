@@ -16,6 +16,7 @@ namespace RecklessDriver {
 		Player(int health, PlayerVehicle *pVehicle);
 		~Player();
 
+		int GetHealth();
 		bool IsAlive() const;
 
 		void Accelerate();

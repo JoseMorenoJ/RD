@@ -11,8 +11,7 @@ namespace RecklessDriver {
 		, _handling(handling)
 		, _topSpeed(topSpeed)
 		, _strength(strength)
-	{
-	}
+	{}
 	//default Constructor
 	PlayerVehicle::PlayerVehicle(){}
 

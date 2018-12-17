@@ -4,22 +4,31 @@
 		game process.
 */
 
+#include "Player.h"
+
 namespace RecklessDriver {
 	class GameManager
 	{
 	public:
-		GameManager();
 		~GameManager();
 
 		int GetCash() const;
+		static GameManager & GetInstance();
 
 		void AddCash(int);
 		
 		void NewGame();
 		void EndGame();
 
+		void ShowStats(Player * pPlayer);
+
 	private:
 		int _cash; //Total cash accumulated
+
+		void Drive();
+
+		GameManager(); //We make it private so we cannot call GetInstance from out the class.
+
 
 	};
 }
