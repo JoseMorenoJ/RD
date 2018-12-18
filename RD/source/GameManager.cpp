@@ -10,6 +10,7 @@
 #include "PlayerVehicle.h"
 #include "Player.h"
 #include "Scene.h"
+#include "Hub.h"
 
 
 namespace RecklessDriver {
@@ -21,10 +22,7 @@ namespace RecklessDriver {
 	GameManager::~GameManager(){}
 
 	//Getter to _cash. This cash is the total cash that the player has accumulated.
-	int GameManager::GetCash() const
-	{
-		return this->_cash;
-	}
+	int GameManager::GetCash() const { return this->_cash; }
 
 	//Get the instance of the game manager to be able to accumulate the cash.
 	GameManager& GameManager::GetInstance()
@@ -35,10 +33,7 @@ namespace RecklessDriver {
 	}
 
 	//Add some amount to the total cash.
-	void GameManager::AddCash(int amount)
-	{
-		this->_cash += amount;
-	}
+	void GameManager::AddCash(int amount) { this->_cash += amount; }
 
 	//This will generate the new game. Here there is the main logic of the game.
 	void GameManager::NewGame()
@@ -48,29 +43,36 @@ namespace RecklessDriver {
 		const int SEDAN_TOPSPEED = 70;
 		const int SEDAN_STRENGTH = 4;
 		const int PLAYER_INIT_HEALTH = 100;
+		
 		//Choose a vehicle
 		PlayerVehicle * pVehicle = new PlayerVehicle(
 			"Sedan", SEDAN_HANDLING, SEDAN_TOPSPEED, SEDAN_STRENGTH);
+		
 		//Create a player object
 		Player *pPlayer = new Player(PLAYER_INIT_HEALTH, pVehicle);
-		//Prepare te scenary (Scene Object?)
-		Scene scene;
-		scene.Start(pPlayer);
+
+		//Create the pool object
+		ObjectPool *pPool = new ObjectPool;
+		
+		//Prepare te scenary 
+		Scene scene(pPool, pPlayer);
+		scene.Start(pPlayer); //TODO: Redundant
+
+		//Create the Hub object
+		Hub HUB;
+
 		//Run a loop
 		while (pPlayer->IsAlive())
 		{
 			//Generate objects (side, traffic...)
-			scene.GenerateNPCs();
+			pPool->GenerateNPCs();
 			this->Drive();
-
-			//Clear the screen
-			system("cls");
 			
 			//Generate the collisions
 			scene.Collide();
 
-			//Show player's money and health
-			this->ShowStats(pPlayer);
+			//Update the HUB info
+			HUB.update(pPool, pPlayer);
 		}
 		//Until health is lower or equal than zero.
 

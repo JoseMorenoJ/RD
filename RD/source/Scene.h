@@ -7,37 +7,28 @@
 #include <vector>
 #include <random>
 
-//#include "Globals.h"
-#include "SideObject.h"
-#include "TrafficCar.h"
 #include "Player.h"
+#include "ObjectPool.h"
 
 namespace RecklessDriver {
 
 	class Scene
 	{
 	public:
-		Scene();
+		Scene(ObjectPool*, Player*);
 		~Scene();
 
 		void Start(Player *pPlayer);
-		void GenerateNPCs();
 		void Collide();
 
 	private:
-		std::vector<SideObject *> _sideObjects;		//list of sideobjects created
-		std::vector<TrafficCar *> _trafficObjects;  //list of traffic cars created
-		Player *_pPlayer;
-
-		//Necessary for a random object generation
+		//Necessary for a random collision generation
 		std::random_device _rd;
 		std::default_random_engine _engine;
 
-		//Some Helper functions
-		SideObject* GenerateSideObjects();
-		TrafficCar* GenerateTraffic();
-		void DisplaySideObjects();
-		void DisplayTraffic();
+		ObjectPool *_pPool; //pool of game objects
+		Player *_pPlayer; //Player Car
+
 	};
 
 }//namespace RecklessDriver
