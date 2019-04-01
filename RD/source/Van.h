@@ -12,7 +12,7 @@ namespace RecklessDriver {
 		public TrafficCar
 	{
 	public:
-		Van(int damage, int cash);
+		Van();
 		~Van();
 
 		void OnCollision(const GameObject &other) override;

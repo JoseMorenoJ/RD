@@ -19,16 +19,15 @@ namespace RecklessDriver {
 		
 		void NewGame();
 		void EndGame();
-
-		void ShowStats(Player * pPlayer);
+		bool PlayAgain();
 
 	private:
-		int _cash; //Total cash accumulated
+		int _cashAccum;	//Total cash accumulated
 
-		void Drive();
-
-		GameManager(); //We make it private so we cannot call GetInstance from out the class.
-
+		GameManager();  //We make it private so we cannot call GetInstance from out the class.
+		
+		//Helper methods
+		void ResetCash(); 
 
 	};
 }

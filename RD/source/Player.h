@@ -13,10 +13,11 @@ namespace RecklessDriver {
 		public GameObject
 	{
 	public:
-		Player(int health, PlayerVehicle *pVehicle);
+		Player();
+		Player(PlayerVehicle &vehicle);
 		~Player();
 
-		int GetHealth();
+		int GetHealth() const;
 		bool IsAlive() const;
 
 		void Accelerate();
@@ -27,7 +28,7 @@ namespace RecklessDriver {
 		void ApplyDamage(int damage, int cash);
 
 	private:
-		PlayerVehicle *_pVehicle; //pointer to the player's vehicle
+		PlayerVehicle _vehicle; //pointer to the player's vehicle
 		int _health; //represents the health of the player
 	};
 }

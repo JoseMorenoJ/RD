@@ -11,8 +11,8 @@ namespace RecklessDriver {
 	class PlayerVehicle
 	{
 	public:
-		PlayerVehicle(std::string name, int handling, int topSpeed, int strength);
 		PlayerVehicle();
+		PlayerVehicle(const PlayerVehicle &vehicle);
 		~PlayerVehicle();
 
 		void SetName(std::string);

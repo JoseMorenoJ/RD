@@ -19,13 +19,15 @@ namespace RecklessDriver {
 		Hub();
 		~Hub();
 
-		void update(ObjectPool *, Player *);
+		void Update(ObjectPool &pool, Player &player);
+		void Driving() const;
+		void ShowEndGame(int) const;
 
 	private:
 
 		//Some Helper functions
-		void DisplaySideObjects(ObjectPool *);
-		void DisplayTraffic(ObjectPool *);
+		void DisplayGameObjects(ObjectPool &pool);
+		void ShowStats(const Player &player);
 
 	};
 

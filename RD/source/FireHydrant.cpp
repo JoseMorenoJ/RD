@@ -7,39 +7,47 @@
 
 #include "FireHydrant.h"
 #include "Player.h"
+#include "params.h"
 
 namespace RecklessDriver {
 
+	//**************************************************************************************
 	//Constructor
-	FireHydrant::FireHydrant(int damage, int cash):SideObject(damage, cash)
+	FireHydrant::FireHydrant(): SideObject(params::FIREHYDRANT_DAMAGE, params::FIREHYDRANT_CASH)
 	{
 		SetName("Fire Hydrant");
 	}
 
+	//**************************************************************************************
 	//default Destructor
-	FireHydrant::~FireHydrant() {}
+	FireHydrant::~FireHydrant() { std::cout << "~FireHydrant()" << std::endl; }
 
+	//**************************************************************************************
 	//Specifies the behaviour when two GameObject collide
 	void FireHydrant::OnCollision(const GameObject &other)
 	{
 		if (other.GetName() == "Player")
 		{
 			Player &p = (Player &)other;
-			if (_count == 0)
+			if (this->IsCrashed()) //2nd collision
 			{
-				std::cout << "### COLLISION -> FireHydrant" << std::endl;
+				//Nothing happend in a second collision with a Side Object
+				std::cout << "### Run over a " << this->GetName() << std::endl;
+			}
+			else //1st collision
+			{
+				std::cout << "### COLLISION -> Fire Hydrant" << std::endl;
+				this->Crashed();
+				this->SetName("water fountain");
 				this->Fountain();
 				p.ApplyDamage(this->GetDamage(), this->GetCash());
-			}
-			else
-			{
-				std::cout << "### EXTRA COLLISION -> FireHydrant" << std::endl;
-				p.ApplyDamage(this->GetDamage(), this->GetCash());
-			}
+			} 
 		}
 		return;
 	}
 
+	//**************************************************************************************
+	//
 	void FireHydrant::Fountain()
 	{
 		std::cout << "WATER FOUNTAIN FROM THE FIRE HYDRANT!!" << std::endl;

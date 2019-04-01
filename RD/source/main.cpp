@@ -7,6 +7,7 @@
 	17 December 2018
 	José Moreno
 */
+#include <iostream>
 
 #include "GameManager.h"
 
@@ -14,7 +15,14 @@ using namespace RecklessDriver;
 
 int main()
 {
-	GameManager::GetInstance().NewGame();
+	do {
+
+		GameManager::GetInstance().NewGame();
+
+	} while ( GameManager::GetInstance().PlayAgain() );
+
+	std::cout << std::endl;
+	std::cout << "Thanks for playing, see you next time!" << std::endl;
 
 	return 0;
 }

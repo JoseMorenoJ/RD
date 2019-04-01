@@ -12,7 +12,7 @@ namespace RecklessDriver {
 		public SideObject
 	{
 	public:
-		FireHydrant(int damage, int cash);
+		FireHydrant();
 		~FireHydrant();
 
 		void OnCollision(const GameObject &other) override;
@@ -20,4 +20,5 @@ namespace RecklessDriver {
 	private:
 		void Fountain();
 	};
+
 }//namespace RecklessDriver

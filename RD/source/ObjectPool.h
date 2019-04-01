@@ -7,8 +7,7 @@
 #include <vector>
 #include <random>
 
-#include "SideObject.h"
-#include "TrafficCar.h"
+#include "GameObject.h"
 
 namespace RecklessDriver {
 
@@ -16,24 +15,22 @@ namespace RecklessDriver {
 	{
 	public:
 		ObjectPool();
+		ObjectPool(const ObjectPool &pool);
 		~ObjectPool();
 
-		std::vector<SideObject *> *GetvSideObjects();
-		std::vector<TrafficCar *> *GetvTraffic();
+		std::vector<GameObject *> &GetvGameObjects(); //cannot be const cause it returns &value
 
-		void GenerateNPCs();
+		void GenerateNewPoolObject();
 
 	private:
 		//Necessary for a random object generation
-		std::random_device _rd;
-		std::default_random_engine _engine;
-
-		std::vector<SideObject *> _vSideObjects;		//list of sideobjects created
-		std::vector<TrafficCar *> _vTrafficObjects;  //list of traffic cars created
+		std::random_device _rd;					 //random device
+		std::default_random_engine _engine;		 //random engine
+		std::vector<GameObject *> _vGameObjects; //list of Game Objects created
 
 		//Some helper functions
-		SideObject* GenerateSideObjects();
-		TrafficCar* GenerateTraffic();
+		GameObject * GenerateNextObject();
+
 	};
 
 }//namespace RecklessDriver

@@ -12,7 +12,7 @@ namespace RecklessDriver {
 		public SideObject
 	{
 	public:
-		LetterBox(int damage, int cash);
+		LetterBox();
 		~LetterBox();
 
 		void OnCollision(const GameObject &other) override;

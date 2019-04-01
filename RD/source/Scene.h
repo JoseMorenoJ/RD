@@ -1,6 +1,7 @@
 #pragma once
 /*
 	class Scene: it holds all the objects that are active in the Screen.
+			and manages the possible crashes.
 
 */
 
@@ -15,10 +16,9 @@ namespace RecklessDriver {
 	class Scene
 	{
 	public:
-		Scene(ObjectPool*, Player*);
+		Scene(ObjectPool &pool, Player &player);
 		~Scene();
 
-		void Start(Player *pPlayer);
 		void Collide();
 
 	private:
@@ -26,8 +26,8 @@ namespace RecklessDriver {
 		std::random_device _rd;
 		std::default_random_engine _engine;
 
-		ObjectPool *_pPool; //pool of game objects
-		Player *_pPlayer; //Player Car
+		ObjectPool _pool; //pool of game objects
+		Player _player; //Player Car
 
 	};
 

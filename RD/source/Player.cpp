@@ -5,42 +5,56 @@
 
 #include "Player.h"
 #include "GameManager.h"
+#include "params.h"
 
 namespace RecklessDriver {
 
+	//**************************************************************************************
 	//Constructor
-	Player::Player(int health, PlayerVehicle * pVehicle)
-		: _health(health)
-		, _pVehicle(pVehicle)
+	Player::Player() 
+		: _health(params::PLAYER_INIT_HEALTH)
 	{
-		this->SetName("Player");
+		_vehicle = PlayerVehicle();
+		SetName("Player");
+		SetTag("Player");
+	}
+	Player::Player(PlayerVehicle &vehicle)
+		: _health(params::PLAYER_INIT_HEALTH)
+		, _vehicle(vehicle)
+	{
+		SetName("Player");
+		SetTag("Player");
 	}
 
+	//**************************************************************************************
 	//default Destructor
-	Player::~Player()
-	{
-	}
+	Player::~Player() {}
+	
+	//**************************************************************************************
 	//GetHealth:
-	int Player::GetHealth() { return this->_health; }
+	int Player::GetHealth() const { return _health; }
 
+	//**************************************************************************************
 	//Check on the players health.
 	bool Player::IsAlive() const 
 	{ 
-		if(this->_health > 0)
+		if(_health > 0)
 			return true;
 		else return false;
 	}
 
+	//**************************************************************************************
 	//Mouvement for the player relates directly with the Player Vehicle mouvement functions.
-	void Player::Accelerate() { this->_pVehicle->Up(); }
-	void Player::Brake() { this->_pVehicle->Down(); }
-	void Player::SteerRight() { this->_pVehicle->Right(); }
-	void Player::SteerLeft() { this->_pVehicle->Left(); }
+	void Player::Accelerate() { _vehicle.Up(); }
+	void Player::Brake() { _vehicle.Down(); }
+	void Player::SteerRight() { _vehicle.Right(); }
+	void Player::SteerLeft() { _vehicle.Left(); }
 
+	//**************************************************************************************
 	//Called when player collides with another object
 	void Player::ApplyDamage(int damage, int cash)
 	{
-		this->_health -= damage - this->_pVehicle->GetStrength();
+		_health -= damage - _vehicle.GetStrength();
 		GameManager::GetInstance().AddCash(cash);
 	}
 

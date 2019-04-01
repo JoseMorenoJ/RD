@@ -17,18 +17,16 @@ namespace RecklessDriver {
 
 		void SetDamage(int);
 		void SetCash(int);
-		void SetCount(int);
+		void Crashed();
 
 		int GetDamage() const;
 		int GetCash() const;
-		int GetCount() const;
-
-	protected:
-		int _count;  //count of consecutive crashes with the side object
+		bool IsCrashed() const;
 
 	private:
 		int _damage; //damage done to the players car
 		int _cash;	//cash given to the player after the first crash
+		bool _bCrashed;	   //Wether is enabled or disabled
 
 	};
 }//namespace RecklessDriver

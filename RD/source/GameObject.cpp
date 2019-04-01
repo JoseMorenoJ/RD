@@ -4,18 +4,31 @@
 */
 
 #include "GameObject.h"
+#include <iostream>
 
 namespace RecklessDriver {
 
+	//**************************************************************************************
+	//Constructor
+	GameObject::GameObject() {}
+	
+	//**************************************************************************************
+	//Destructor
+	GameObject::~GameObject() {}
+
+	//**************************************************************************************
 	//Setters:
 	void GameObject::SetName(std::string newName) { this->_name = newName; }
 	void GameObject::SetTag(std::string newTag) { this->_tag = newTag; }
-	void GameObject::SetEnabled(bool newEnabled) { this->_enabled = newEnabled; }
+	void GameObject::SetType(EGameObjectType newType) { this->_type = newType; }
+	
+	//**************************************************************************************
 	//Getters:
-	const std::string GameObject::GetName() const { return this->_name; }
-	const std::string GameObject::GetTag() const { return this->_tag; }
-	bool GameObject::IsEnabled() const { return this->_enabled; }
+	std::string GameObject::GetName() const { return this->_name; }
+	std::string GameObject::GetTag() const { return this->_tag; }
+	EGameObjectType GameObject::GetType() const { return this->_type; }
 
+	//**************************************************************************************
 	//Specifies the behaviour when two GameObject collide. Will be overriden when necessary.
 	void GameObject::OnCollision(const GameObject &other)
 	{

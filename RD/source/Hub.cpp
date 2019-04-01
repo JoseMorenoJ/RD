@@ -7,55 +7,89 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include <thread>
 
 #include "Hub.h"
-
+#include "GameManager.h"
+#include "SideObject.h"
 
 namespace RecklessDriver {
 
+	//**************************************************************************************
 	//default Constructor
 	Hub::Hub(){}
 
+	//**************************************************************************************
 	//default Destructor
 	Hub::~Hub(){}
 
+	//**************************************************************************************
 	//Rewrite the screen with the new info.
-	void Hub::update(ObjectPool * pPool, Player * pPlayer)
+	void Hub::Update(ObjectPool &pool, Player &player)
 	{
 		//Clear the screen
 		system("cls");
 
-		//TODO: Unite the functions to take Game Objects undistinctly.
-		DisplaySideObjects(pPool);
-		DisplayTraffic(pPool);
+		DisplayGameObjects(pool);
 
 		//Show the cash from the GM and the health from the player
-
-		//Show: Player is driving
+		ShowStats(player);
 
 		return;
 	}
 
-	//Display the side object
-	void Hub::DisplaySideObjects(ObjectPool * pPool)
+	//**************************************************************************************
+	//Shows that the player is driving on the screen.
+	void Hub::Driving() const
 	{
-		std::cout << "\nSide OBJECTS" << std::endl;
-		for (const auto *p : * pPool->GetvSideObjects())
+		std::cout << "\nPlayer is driving\n";
+		for (int i = 0; i < 10; ++i)
 		{
-			std::cout << p->GetName() << "\t";
+			std::cout << ".";
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 		std::cout << std::endl;
 	}
 
-	//Display de traffic cars
-	void Hub::DisplayTraffic(ObjectPool * pPool)
+	//**************************************************************************************
+	//Screen called after the game is over, it shows the total points obtained.
+	void Hub::ShowEndGame(int tCash) const
 	{
-		std::cout << "\nTraffic OBJECTS" << std::endl;
-		for (const auto *p : * pPool->GetvTraffic())
+		//TODO: show a list of the crashes
+
+		std::cout << "Total cash accumulated: $" << tCash << std::endl;
+	}
+
+	//**************************************************************************************
+	//Display all the objects in the pool.
+	void Hub::DisplayGameObjects(ObjectPool &pool)
+	{
+		for (const auto *p : pool.GetvGameObjects())
 		{
-			std::cout << p->GetName() << "\t";
+			if (p != nullptr) //check that the Game Object is valid.
+			{
+				if (p->GetTag() == "Side Object")
+				{
+					std::cout << p->GetName() << "\t[X]";
+				}
+				if (p->GetTag() == "Traffic Car")
+				{
+					std::cout << "\t\t\t[O]" << p->GetName();
+				}
+			}
+			std::cout << std::endl;
 		}
-		std::cout << std::endl;
+		return;
+	}
+
+	//**************************************************************************************
+	//Show the health points and the accumulated money of the player in the screen.
+	void Hub::ShowStats(const Player &player)
+	{
+		std::cout << "\n***************************************** Cash: $";
+		std::cout << GameManager::GetInstance().GetCash() << "\tHealth: ";
+		std::cout << std::max(player.GetHealth(), 0) << std::endl; //Never print less than 0
 	}
 
 }//namespace RecklessDriver
+

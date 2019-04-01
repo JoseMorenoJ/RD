@@ -7,92 +7,80 @@
 #include <thread>
 
 #include "ObjectPool.h"
+#include "GameObject.h"
 #include "FireHydrant.h"
 #include "LetterBox.h"
-#include "Van.h"
 #include "Sedan.h"
+#include "Van.h"
+#include "params.h"
 
 namespace RecklessDriver {
 
+	//**************************************************************************************
 	//Constructor
-	ObjectPool::ObjectPool() : _engine(_rd()) {}
+	ObjectPool::ObjectPool() : _engine(_rd())
+	{
+		//Initialise the pool with 10 nullptrs
+		_vGameObjects = std::vector<GameObject *>(params::POOL_SIZE, nullptr);
+	}
+	//Copy constructor
+	ObjectPool::ObjectPool(const ObjectPool &pool) : _engine(_rd())
+	{
+		_vGameObjects = pool._vGameObjects;
+	}
 
-	//default Destructor
+	//**************************************************************************************
+	//default Destructor 
 	ObjectPool::~ObjectPool(){}
 
+	//**************************************************************************************
 	//Getters
-	std::vector<SideObject*> * ObjectPool::GetvSideObjects() { return & this->_vSideObjects; }
-	std::vector<TrafficCar*> * ObjectPool::GetvTraffic() { return & this->_vTrafficObjects; }
+	std::vector<GameObject*> & ObjectPool::GetvGameObjects() { return _vGameObjects; }
 
+	//**************************************************************************************
 	//Generate the objects in the scene.
-	void ObjectPool::GenerateNPCs()
+	void ObjectPool::GenerateNewPoolObject()
 	{
-		//Check maximum side objects at a time (now 7)
-		if (this->_vSideObjects.size() > 6)
+		//Check maximum game objects at a time
+		if (this->_vGameObjects.size() >= params::POOL_SIZE)
 		{
-			this->_vSideObjects.erase(this->_vSideObjects.begin()); //Erase the oldest item.
+			if (this->_vGameObjects[0] != nullptr)
+			{
+				//Free the object from the heap
+				delete this->_vGameObjects[0];
+			}
+			this->_vGameObjects.erase(this->_vGameObjects.begin()); //Erase the pointer to the oldest item.
 		}
-		this->_vSideObjects.push_back(GenerateSideObjects()); //TODO check if returns nullptr
-
-		//Check maximum traffic cars at a time (now 5)
-		if (this->_vTrafficObjects.size() > 4)
-		{
-			this->_vTrafficObjects.erase(this->_vTrafficObjects.begin()); //Erase the oldest item.
-		}
-		this->_vTrafficObjects.push_back(GenerateTraffic()); //		same
+		//Push back the next object.
+		this->_vGameObjects.push_back( this->GenerateNextObject() );
 
 	}
 
+	//**************************************************************************************
+	//TODO: check what is the factory pattern and if we can use it here
 	//Add the different Side Objects to the objects pool.
-	SideObject * ObjectPool::GenerateSideObjects()
+	GameObject * ObjectPool::GenerateNextObject()
 	{
 		//Define const variables:
-		const int N_SIDEOBJECT_TYPES = 2; //Fire Hydrant, Letter Box
-		const int FIREHYDRANT_DAMAGE = 10;
-		const int FIREHYDRANT_CASH = 10;
-		const int LETTERBOX_DAMAGE = 11;
-		const int LETTERBOX_CASH = 13;
+		const int SWITCH_CASES = 5;
 
 		//Generate the objects depending on the uniform distribution
-		std::uniform_int_distribution<int> dist(0, N_SIDEOBJECT_TYPES - 1);
+		std::uniform_int_distribution<int> dist(0, SWITCH_CASES - 1);
 		switch (dist(this->_engine))
 		{
-		case 0://Firehydrant
-			return new FireHydrant(FIREHYDRANT_DAMAGE, FIREHYDRANT_CASH);
-			break;
-		case 1: //LetterBox
-			return new LetterBox(LETTERBOX_DAMAGE, LETTERBOX_CASH);
-			break;
-		default:
-			break;
+		case 0://NO INIT Object, nothing happens with it.
+			return nullptr;
+		case 1://FireHydrant
+			return new FireHydrant();
+		case 2: //LetterBox
+			return new LetterBox();
+		case 3://Sedan
+			return new Sedan();
+		case 4: //Van
+			return new Van();
+		default: //Just in case we get out of the range.
+			return nullptr;
 		}
-		return nullptr;
-	}
-
-	//Add the different Traffic to the objects pool.
-	TrafficCar * ObjectPool::GenerateTraffic()
-	{
-		//Define const variables:
-		const int N_TRAFFIC_TYPES = 2; //Sedan, Van
-		const int SEDAN_DAMAGE = 10;
-		const int SEDAN_CASH = 20;
-		const int VAN_DAMAGE = 15;
-		const int VAN_CASH = 25;
-
-		//Generate the objects depending on the uniform distribution
-		std::uniform_int_distribution<int> dist(0, N_TRAFFIC_TYPES - 1);
-		switch (dist(this->_engine))
-		{
-		case 0://Sedan
-			return new Sedan(SEDAN_DAMAGE, SEDAN_CASH);
-			break;
-		case 1: //Van
-			return new Van(VAN_DAMAGE, VAN_CASH);
-			break;
-		default:
-			break;
-		}
-		return nullptr;
 	}
 
 }//namespace RecklessDriver

@@ -7,25 +7,32 @@
 
 namespace RecklessDriver {
 	
+	//**************************************************************************************
 	//Constructor
 	SideObject::SideObject(int damage, int cash)
 		:_damage(damage)
 		, _cash(cash)
-		, _count(0)
+		, _bCrashed(false)
 	{
-		SetName("Side Object");
+		SetName("");
+		SetTag("Side Object");
+
 	}
 	
+	//**************************************************************************************
 	//default Destructor
 	SideObject::~SideObject(){}
 
+	//**************************************************************************************
 	//Setters:
 	void SideObject::SetDamage(int newDamage) { this->_damage = newDamage; }
 	void SideObject::SetCash(int newCash) { this->_cash = newCash; }
-	void SideObject::SetCount(int newCount) { this->_count = newCount; }
+	void SideObject::Crashed() { this->_bCrashed = true; }
+	
+	//**************************************************************************************
 	//Getters:
 	int SideObject::GetDamage() const { return this->_damage; }
 	int SideObject::GetCash() const { return this->_cash; }
-	int SideObject::GetCount() const { return this->_count; }
+	bool SideObject::IsCrashed() const { return this->_bCrashed; }
 
 }//namespace RecklessDriver
