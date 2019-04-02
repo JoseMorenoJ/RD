@@ -4,7 +4,6 @@
 */
 
 #include <iostream>
-//QSDFQSDFQSDF
 
 #include "Sedan.h"
 #include "Player.h"
