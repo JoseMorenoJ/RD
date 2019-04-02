@@ -1,3 +1,9 @@
+# .orig files from merge conflicts
+##################################
+*.orig
+
+# Visualstudio 
+##############
 .vs/
 *.vcxproj
 *.user
