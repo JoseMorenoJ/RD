@@ -10,8 +10,8 @@ The game is fun.
 ##Contents
 The game main part is designed but only as a win32/terminal application. It doesn't get any input from the player. It generates random objects in the road and random colissions with them. It stops when the health of the car is below zero.
 
-##master branch
-This lines are just adding modifications to the master branch to have "complex" merrge. This lines are not in our working_version branch.
+##master
+we don't see the changes that are only in master. We are ready to make the merge .
 
 ##the working-version branch
 This is about making a working version after the course finished. Before we add the HUB changes.
