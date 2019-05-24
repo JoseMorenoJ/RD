@@ -6,28 +6,26 @@
 
 #include "Player.h"
 
-namespace RecklessDriver {
-	class GameManager
-	{
-	public:
-		~GameManager();
+class GameManager
+{
+public:
+	~GameManager();
 
-		int GetCash() const;
-		static GameManager & GetInstance();
+	int GetCash() const;
+	static GameManager & GetInstance();
 
-		void AddCash(int);
+	void AddCash(int);
 		
-		void NewGame();
-		void EndGame();
-		bool PlayAgain();
+	void NewGame();
+	void EndGame();
+	bool PlayAgain();
 
-	private:
-		int _cashAccum;	//Total cash accumulated
+private:
+	int _cashAccum;	//Total cash accumulated
 
-		GameManager();  //We make it private so we cannot call GetInstance from out the class.
+	GameManager();  //We make it private so we cannot call GetInstance from out the class.
 		
-		//Helper methods
-		void ResetCash(); 
+	//Helper methods
+	void ResetCash(); 
 
-	};
-}
+};

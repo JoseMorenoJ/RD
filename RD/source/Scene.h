@@ -11,24 +11,20 @@
 #include "Player.h"
 #include "ObjectPool.h"
 
-namespace RecklessDriver {
+class Scene
+{
+public:
+	Scene(ObjectPool &pool, Player &player);
+	~Scene();
 
-	class Scene
-	{
-	public:
-		Scene(ObjectPool &pool, Player &player);
-		~Scene();
+	void Collide();
 
-		void Collide();
+private:
+	//Necessary for a random collision generation
+	std::random_device _rd;
+	std::default_random_engine _engine;
 
-	private:
-		//Necessary for a random collision generation
-		std::random_device _rd;
-		std::default_random_engine _engine;
+	ObjectPool _pool; //pool of game objects
+	Player _player; //Player Car
 
-		ObjectPool _pool; //pool of game objects
-		Player _player; //Player Car
-
-	};
-
-}//namespace RecklessDriver
+};

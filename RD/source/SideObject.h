@@ -6,27 +6,24 @@
 
 #include "GameObject.h"
 
-namespace RecklessDriver {
+class SideObject :
+	public GameObject
+{
+public:
+	SideObject(int damage, int cash);
+	~SideObject();
 
-	class SideObject :
-		public GameObject
-	{
-	public:
-		SideObject(int damage, int cash);
-		~SideObject();
+	void SetDamage(int);
+	void SetCash(int);
+	void Crashed();
 
-		void SetDamage(int);
-		void SetCash(int);
-		void Crashed();
+	int GetDamage() const;
+	int GetCash() const;
+	bool IsCrashed() const;
 
-		int GetDamage() const;
-		int GetCash() const;
-		bool IsCrashed() const;
+private:
+	int _damage; //damage done to the players car
+	int _cash;	//cash given to the player after the first crash
+	bool _bCrashed;	   //Wether is enabled or disabled
 
-	private:
-		int _damage; //damage done to the players car
-		int _cash;	//cash given to the player after the first crash
-		bool _bCrashed;	   //Wether is enabled or disabled
-
-	};
-}//namespace RecklessDriver
+};

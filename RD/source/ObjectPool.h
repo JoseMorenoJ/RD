@@ -9,28 +9,24 @@
 
 #include "GameObject.h"
 
-namespace RecklessDriver {
+class ObjectPool
+{
+public:
+	ObjectPool();
+	ObjectPool(const ObjectPool &pool);
+	~ObjectPool();
 
-	class ObjectPool
-	{
-	public:
-		ObjectPool();
-		ObjectPool(const ObjectPool &pool);
-		~ObjectPool();
+	std::vector<GameObject *> &GetvGameObjects(); //cannot be const cause it returns &value
 
-		std::vector<GameObject *> &GetvGameObjects(); //cannot be const cause it returns &value
+	void GenerateNewPoolObject();
 
-		void GenerateNewPoolObject();
+private:
+	//Necessary for a random object generation
+	std::random_device _rd;					 //random device
+	std::default_random_engine _engine;		 //random engine
+	std::vector<GameObject *> _vGameObjects; //list of Game Objects created
 
-	private:
-		//Necessary for a random object generation
-		std::random_device _rd;					 //random device
-		std::default_random_engine _engine;		 //random engine
-		std::vector<GameObject *> _vGameObjects; //list of Game Objects created
+	//Some helper functions
+	GameObject * GenerateNextObject();
 
-		//Some helper functions
-		GameObject * GenerateNextObject();
-
-	};
-
-}//namespace RecklessDriver
+};

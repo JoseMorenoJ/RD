@@ -4,10 +4,7 @@
 	params.h: This header file contains the parameters required for the game.
 		It will allow to not use hard-typed numbers.
 */
-
-//We store them in a separate namespace to avoid name clash.
 namespace params {
-
 	// System
 	const int N_TRAFFIC_TYPES = 2; //Sedan, Van
 	const int N_SIDEOBJECT_TYPES = 2; //Fire Hydrant, Letter Box
@@ -35,4 +32,4 @@ namespace params {
 
 	const int LETTERBOX_DAMAGE = 11;
 	const int LETTERBOX_CASH = 13;
-}
+} //namespace params

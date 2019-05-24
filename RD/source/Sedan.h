@@ -6,15 +6,12 @@
 
 #include "TrafficCar.h"
 
-namespace RecklessDriver {
+class Sedan :
+	public TrafficCar
+{
+public:
+	Sedan();
+	~Sedan();
 
-	class Sedan :
-		public TrafficCar
-	{
-	public:
-		Sedan();
-		~Sedan();
-
-		void OnCollision(const GameObject &other) override;
-	};
-}//namespace RecklesDriver
+	void OnCollision(const GameObject &other) override;
+};

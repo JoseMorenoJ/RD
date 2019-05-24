@@ -6,19 +6,16 @@
 
 #include "SideObject.h"
 
-namespace RecklessDriver {
+class LetterBox :
+	public SideObject
+{
+public:
+	LetterBox();
+	~LetterBox();
 
-	class LetterBox :
-		public SideObject
-	{
-	public:
-		LetterBox();
-		~LetterBox();
+	void OnCollision(const GameObject &other) override;
 
-		void OnCollision(const GameObject &other) override;
+private:
+	void LettersFlying();
 
-	private:
-		void LettersFlying();
-
-	};
-}
+};

@@ -6,19 +6,15 @@
 
 #include "SideObject.h"
 
-namespace RecklessDriver {
+class FireHydrant :
+	public SideObject
+{
+public:
+	FireHydrant();
+	~FireHydrant();
 
-	class FireHydrant :
-		public SideObject
-	{
-	public:
-		FireHydrant();
-		~FireHydrant();
+	void OnCollision(const GameObject &other) override;
 
-		void OnCollision(const GameObject &other) override;
-
-	private:
-		void Fountain();
-	};
-
-}//namespace RecklessDriver
+private:
+	void Fountain();
+};

@@ -11,8 +11,6 @@
 
 #include "GameManager.h"
 
-using namespace RecklessDriver;
-
 int main()
 {
 	do {

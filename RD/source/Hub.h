@@ -10,25 +10,20 @@
 #include "ObjectPool.h"
 #include "Player.h"
 
+class Hub
+{
+public:
+	Hub();
+	~Hub();
 
-namespace RecklessDriver {
+	void Update(ObjectPool &pool, Player &player);
+	void Driving() const;
+	void ShowEndGame(int) const;
 
-	class Hub
-	{
-	public:
-		Hub();
-		~Hub();
+private:
 
-		void Update(ObjectPool &pool, Player &player);
-		void Driving() const;
-		void ShowEndGame(int) const;
+	//Some Helper functions
+	void DisplayGameObjects(ObjectPool &pool);
+	void ShowStats(const Player &player);
 
-	private:
-
-		//Some Helper functions
-		void DisplayGameObjects(ObjectPool &pool);
-		void ShowStats(const Player &player);
-
-	};
-
-}//namespace RecklessDriver
+};

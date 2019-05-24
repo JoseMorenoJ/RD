@@ -10,111 +10,107 @@
 #include "Hub.h"
 
 
-namespace RecklessDriver {
+//**************************************************************************************
+//default Constructor
+GameManager::GameManager(){}
 
-	//**************************************************************************************
-	//default Constructor
-	GameManager::GameManager(){}
+//**************************************************************************************
+//default Destructor
+GameManager::~GameManager(){}
 
-	//**************************************************************************************
-	//default Destructor
-	GameManager::~GameManager(){}
+//**************************************************************************************
+//Getter to _cash. This cash is the total cash that the player has accumulated.
+int GameManager::GetCash() const { return this->_cashAccum; }
 
-	//**************************************************************************************
-	//Getter to _cash. This cash is the total cash that the player has accumulated.
-	int GameManager::GetCash() const { return this->_cashAccum; }
+//**************************************************************************************
+//Get the instance of the game manager to be able to accumulate the cash.
+GameManager& GameManager::GetInstance()
+{
+	//Singleton: Structure that assure only one instance of the class.
+	//Meyer's Singleton:
+	static GameManager instance;
+	return instance;
+}
 
-	//**************************************************************************************
-	//Get the instance of the game manager to be able to accumulate the cash.
-	GameManager& GameManager::GetInstance()
+//**************************************************************************************
+//Add some amount to the total cash.
+void GameManager::AddCash(int amount) { this->_cashAccum += amount; }
+
+//**************************************************************************************
+//Generates the new game. The main loop and logic of the game.
+void GameManager::NewGame()
+{	
+	//Choose a vehicle //TODO: give a choice, actually
+	PlayerVehicle  vehicle = PlayerVehicle();
+		
+	//Create a player object
+	Player player(vehicle);
+
+	//Create the pool object
+	ObjectPool *pool = new ObjectPool();
+		
+	//Prepare te scenary 
+	Scene scene(*pool, player);
+
+	//Create the Hub object
+	Hub HUB;
+
+	//Set initial cash to 0
+	ResetCash();
+
+	//Run the loop
+	while (player.IsAlive())
 	{
-		//Singleton: Structure that assure only one instance of the class.
-		//Meyer's Singleton:
-		static GameManager instance;
-		return instance;
-	}
+		//Generate a new object (side, traffic...)
+ 		pool->GenerateNewPoolObject();
 
-	//**************************************************************************************
-	//Add some amount to the total cash.
-	void GameManager::AddCash(int amount) { this->_cashAccum += amount; }
-
-	//**************************************************************************************
-	//Generates the new game. The main loop and logic of the game.
-	void GameManager::NewGame()
-	{	
-		//Choose a vehicle //TODO: give a choice, actually
-		PlayerVehicle  vehicle = PlayerVehicle();
-		
-		//Create a player object
-		Player player(vehicle);
-
-		//Create the pool object
-		ObjectPool *pool = new ObjectPool();
-		
-		//Prepare te scenary 
-		Scene scene(*pool, player);
-
-		//Create the Hub object
-		Hub HUB;
-
-		//Set initial cash to 0
-		ResetCash();
-
-		//Run the loop
-		while (player.IsAlive())
-		{
-			//Generate a new object (side, traffic...)
- 			pool->GenerateNewPoolObject();
-
-			//Update the HUB info
-			HUB.Update(*pool, player);
-
-			HUB.Driving();
-			scene.Collide();
-
-		} //Game over
-
-		//Destroy the Scene and the objects.
-		this->EndGame();
-
-		//Show result
+		//Update the HUB info
 		HUB.Update(*pool, player);
-		HUB.ShowEndGame( GetCash() );
 
-		return;
-	}
+		HUB.Driving();
+		scene.Collide();
 
-	//**************************************************************************************
-	//Prints out the scores info once the game is over.
-	void GameManager::EndGame()
-	{
-		//TODO Implement this function
-		//Erase the instances to erase //Makes no sense to destroy it if we will play again...
+	} //Game over
 
-		//Call every process necessary to show in screen the results of the game
+	//Destroy the Scene and the objects.
+	this->EndGame();
 
-		//Maybe prepare a record list
+	//Show result
+	HUB.Update(*pool, player);
+	HUB.ShowEndGame( GetCash() );
 
-	}
+	return;
+}
 
-	//**************************************************************************************
-	//Asks the player to play again.
-	bool GameManager::PlayAgain() //TODO Integrate the question in the HUB/Graphics
-	{
-		char answer;
+//**************************************************************************************
+//Prints out the scores info once the game is over.
+void GameManager::EndGame()
+{
+	//TODO Implement this function
+	//Erase the instances to erase //Makes no sense to destroy it if we will play again...
 
-		//Ask and get the answer in a char
-		std::cout << "Would you like to play again? (y/n):";
-		std::cin >> answer;
+	//Call every process necessary to show in screen the results of the game
 
-		if (answer == 'y' || answer == 'Y')
-			return true;
-		if (answer == 'n' || answer == 'N')
-			return false;
-	}
-
-	//**************************************************************************************
-	//Set cash to 0 when a new game starts.
-	void GameManager::ResetCash() { this->_cashAccum = 0; }
+	//Maybe prepare a record list
 
 }
+
+//**************************************************************************************
+//Asks the player to play again.
+bool GameManager::PlayAgain() //TODO Integrate the question in the HUB/Graphics
+{
+	char answer;
+
+	//Ask and get the answer in a char
+	std::cout << "Would you like to play again? (y/n):";
+	std::cin >> answer;
+
+	if (answer == 'y' || answer == 'Y')
+		return true;
+	if (answer == 'n' || answer == 'N')
+		return false;
+}
+
+//**************************************************************************************
+//Set cash to 0 when a new game starts.
+void GameManager::ResetCash() { this->_cashAccum = 0; }

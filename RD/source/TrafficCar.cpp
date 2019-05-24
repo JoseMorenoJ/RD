@@ -6,41 +6,37 @@
 
 
 #include "TrafficCar.h"
-
-namespace RecklessDriver {
 	
-	//**************************************************************************************
-	//Constructor
-	TrafficCar::TrafficCar(int damage, int cash)
-		:_damage(damage)
-		, _cash(cash)
-		,_bCrashed(false)
-	{
-		SetName("");
-		SetTag("Traffic Car");
-	}
+//**************************************************************************************
+//Constructor
+TrafficCar::TrafficCar(int damage, int cash)
+	:_damage(damage)
+	, _cash(cash)
+	,_bCrashed(false)
+{
+	SetName("");
+	SetTag("Traffic Car");
+}
 
-	//**************************************************************************************
-	//default Destructor
-	TrafficCar::~TrafficCar() {}
+//**************************************************************************************
+//default Destructor
+TrafficCar::~TrafficCar() {}
 
-	//**************************************************************************************
-	//Setters
-	void TrafficCar::SetDamage(int newDamage) { this->_damage = newDamage; }
-	void TrafficCar::SetCash(int newCash) { this->_cash = newCash; }
-	void TrafficCar::Crashed() { this->_bCrashed = true; }
+//**************************************************************************************
+//Setters
+void TrafficCar::SetDamage(int newDamage) { this->_damage = newDamage; }
+void TrafficCar::SetCash(int newCash) { this->_cash = newCash; }
+void TrafficCar::Crashed() { this->_bCrashed = true; }
 
-	//**************************************************************************************
-	//Getters
-	int TrafficCar::GetDamage() const { return this->_damage; }
-	int TrafficCar::GetCash() const { return this->_cash; }
-	bool TrafficCar::IsCrashed() const { return this->_bCrashed; }
+//**************************************************************************************
+//Getters
+int TrafficCar::GetDamage() const { return this->_damage; }
+int TrafficCar::GetCash() const { return this->_cash; }
+bool TrafficCar::IsCrashed() const { return this->_bCrashed; }
 
-	//**************************************************************************************
-	//Called after a collision.
-	void TrafficCar::Sparks()
-	{
-		std::cout << "SPARKS COMING OUT FROM " << this->GetName() << "!!" << std::endl;
-	}
-
-}//namespace RecklessDriver
+//**************************************************************************************
+//Called after a collision.
+void TrafficCar::Sparks()
+{
+	std::cout << "SPARKS COMING OUT FROM " << this->GetName() << "!!" << std::endl;
+}
