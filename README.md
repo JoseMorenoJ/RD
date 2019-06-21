@@ -7,11 +7,13 @@ This is about driving and crashing to things without breaking your car.
 The game is fun.
 
 ## Contents
-The game main part is designed but only as a win32/terminal application. It doesn't get any input from the player. It generates random objects in the road and random colissions with them. It stops when the health of the car is below zero.
+The game main part is designed but only as a win32/terminal application. It doesn't get any input from the player. It generates random objects in the road and random colissions with them. It stops when the health points of the car are below zero.
 
-# The running-version branch
-This is about making a working version after the course finished. Before we add the HUB changes.
-It is branched from the HUB_mods branch after we merged it to master. So it should be as if we have done the branch from master.
+## Last updates
+After we added the HUB class to print the screen, we managed to break the collisions. No object was colliding anymore. No it is fixed.
 
-# The edit_README branch
-We will use this branch to quick editing and formating to the README.md file and to everything that is related with the appearence of the GitHub repository.
+## Future updates
+  - I want to consider to modify the ObjectPool class as this [ObjectPool](http://www.gameprogrammingpatterns.com/object-pool.html) pattern. 
+  - Next thing to consider would be to add a position to the Game Objects and erase the random crashes.
+  - For a far future, add the graphics and stop using the comand window. That will require more thinking than this.
+  - Also for a far future, applygin the [Lightweight](http://www.gameprogrammingpatterns.com/flyweight.html) pattern to the ObjectPool. 
