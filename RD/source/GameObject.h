@@ -39,7 +39,7 @@ public:
 
 
 	//not pure virtual: we don't want to implement OnCollision in objects that the player cannot crash with.
-	virtual void OnCollision(const GameObject &other);
+	virtual void OnCollision(const GameObject &other) = 0;
 
 protected:
 	EGameObject _type;

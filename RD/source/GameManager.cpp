@@ -28,8 +28,8 @@ GameManager& GameManager::GetInstance()
 {
 	//Singleton: Structure that assure only one instance of the class.
 	//Meyer's Singleton:
-	static GameManager instance;
-	return instance;
+	static GameManager *instance = new GameManager;
+	return *instance;
 }
 
 //**************************************************************************************
@@ -47,10 +47,10 @@ void GameManager::NewGame()
 	Player player(vehicle);
 
 	//Create the pool object
-	ObjectPool *pool = new ObjectPool();
-		
+	ObjectPool *pPool = new ObjectPool();
+	
 	//Prepare te scenary 
-	Scene scene(*pool, player);
+	Scene scene(pPool, &player);
 
 	//Create the Hub object
 	Hub HUB;
@@ -62,10 +62,10 @@ void GameManager::NewGame()
 	while (player.IsAlive())
 	{
 		//Generate a new object (side, traffic...)
- 		pool->GenerateNewPoolObject();
+ 		pPool->GenerateNewPoolObject();
 
 		//Update the HUB info
-		HUB.Update(*pool, player);
+		HUB.Update(pPool, player);
 
 		HUB.Driving();
 		scene.Collide();
@@ -76,7 +76,7 @@ void GameManager::NewGame()
 	this->EndGame();
 
 	//Show result
-	HUB.Update(*pool, player);
+	HUB.Update(pPool, player);
 	HUB.ShowEndGame( GetCash() );
 
 	return;

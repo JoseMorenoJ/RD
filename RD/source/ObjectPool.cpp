@@ -21,11 +21,6 @@ ObjectPool::ObjectPool() : _engine(_rd())
 	//Initialise the pool with 10 nullptrs
 	_vGameObjects = std::vector<GameObject *>(params::POOL_SIZE, nullptr);
 }
-//Copy constructor
-ObjectPool::ObjectPool(const ObjectPool &pool) : _engine(_rd())
-{
-	_vGameObjects = pool._vGameObjects;
-}
 
 //**************************************************************************************
 //default Destructor 

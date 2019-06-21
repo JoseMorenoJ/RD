@@ -23,12 +23,12 @@ Hub::~Hub(){}
 
 //**************************************************************************************
 //Rewrite the screen with the new info.
-void Hub::Update(ObjectPool &pool, Player &player)
+void Hub::Update(ObjectPool* pPool, Player &player)
 {
 	//Clear the screen
 	system("cls");
 
-	DisplayGameObjects(pool);
+	DisplayGameObjects(pPool);
 
 	//Show the cash from the GM and the health from the player
 	ShowStats(player);
@@ -60,9 +60,9 @@ void Hub::ShowEndGame(int tCash) const
 
 //**************************************************************************************
 //Display all the objects in the pool.
-void Hub::DisplayGameObjects(ObjectPool &pool)
+void Hub::DisplayGameObjects(ObjectPool* pPool)
 {
-	for (const auto *p : pool.GetvGameObjects())
+	for (const auto *p : pPool->GetvGameObjects())
 	{
 		if (p != nullptr) //check that the Game Object is valid.
 		{

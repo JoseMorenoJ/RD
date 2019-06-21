@@ -14,7 +14,7 @@
 class Scene
 {
 public:
-	Scene(ObjectPool &pool, Player &player);
+	Scene(ObjectPool* pPool, Player* pPlayer);
 	~Scene();
 
 	void Collide();
@@ -24,7 +24,7 @@ private:
 	std::random_device _rd;
 	std::default_random_engine _engine;
 
-	ObjectPool _pool; //pool of game objects
-	Player _player; //Player Car
+	ObjectPool* _pPool; //Object Pool
+	Player* _pPlayer; //Player Car
 
 };

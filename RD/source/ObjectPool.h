@@ -13,7 +13,6 @@ class ObjectPool
 {
 public:
 	ObjectPool();
-	ObjectPool(const ObjectPool &pool);
 	~ObjectPool();
 
 	std::vector<GameObject *> &GetvGameObjects(); //cannot be const cause it returns &value

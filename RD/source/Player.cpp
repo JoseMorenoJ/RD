@@ -48,6 +48,11 @@ void Player::Brake() { _vehicle.Down(); }
 void Player::SteerRight() { _vehicle.Right(); }
 void Player::SteerLeft() { _vehicle.Left(); }
 
+void Player::OnCollision(const GameObject & other)
+{
+	// so it compiles
+}
+
 //**************************************************************************************
 //Called when player collides with another object
 void Player::ApplyDamage(int damage, int cash)

@@ -11,9 +11,9 @@
 
 //**************************************************************************************
 //Constructor: starts the random generator
-Scene::Scene(ObjectPool &pool, Player &player)
-	: _pool(pool)
-	, _player(player)
+Scene::Scene(ObjectPool* pPool, Player* pPlayer)
+	: _pPool(pPool)
+	, _pPlayer(pPlayer)
 	, _engine(_rd())
 {}
 
@@ -26,15 +26,15 @@ Scene::~Scene(){}
 void Scene::Collide()
 {
 	//Generate a random distribution object for the collision.
-	std::uniform_int_distribution<int> dist(0, _pool.GetvGameObjects().size()-1);
+	std::uniform_int_distribution<int> dist(0, _pPool->GetvGameObjects().size()-1);
 		
 	GameObject *pGO = nullptr;
 	//Select a random object to colide
-	pGO = (_pool.GetvGameObjects()) [dist(_engine)];
+	pGO = (_pPool->GetvGameObjects()) [dist(_engine)];
 
 	if (pGO != nullptr)
 	{
-		pGO->OnCollision(_player);
+		pGO->OnCollision(*_pPlayer);
 		system("pause");
 	}
 }

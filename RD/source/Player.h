@@ -23,6 +23,7 @@ public:
 	void SteerRight();
 	void SteerLeft();
 
+	void OnCollision(const GameObject &other);
 	void ApplyDamage(int damage, int cash);
 
 private:
