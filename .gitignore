@@ -1,0 +1,22 @@
+# This weird file that is always around
+#######################################
+.DS_Store
+notes.txt
+
+# UML Diagram
+#############
+*.mdj
+
+# .orig files from merge conflicts
+##################################
+*.orig
+
+# Visualstudio 
+##############
+.vs/
+*.vcxproj
+*.user
+*.filters
+*.sln
+RD/Debug/
+Debug/
