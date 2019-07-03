@@ -1,4 +1,3 @@
-#pragma once
 /*
 	class Hub: it displays the game information after every iteration.
 
@@ -25,9 +24,12 @@ Hub::~Hub(){}
 //Rewrite the screen with the new info.
 void Hub::Update(ObjectPool* pPool, Player &player)
 {
-	//Clear the screen
+    //Clear the screen
+#ifdef _WIN32
 	system("cls");
-
+#elif __APPLE__
+    system("clear");
+#endif
 	DisplayGameObjects(pPool);
 
 	//Show the cash from the GM and the health from the player

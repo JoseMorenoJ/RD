@@ -35,6 +35,10 @@ void Scene::Collide()
 	if (pGO != nullptr)
 	{
 		pGO->OnCollision(*_pPlayer);
-		system("pause");
+#ifdef _WIN32
+        system("pause");
+#elif __APPLE__
+        system("read -n 1 -s");
+#endif
 	}
 }

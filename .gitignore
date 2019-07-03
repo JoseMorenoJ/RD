@@ -1,3 +1,7 @@
+#Xcode
+######
+*.xcodeproj
+
 # This weird file that is always around
 #######################################
 .DS_Store
