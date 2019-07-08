@@ -8,6 +8,7 @@
 #include <random>
 
 #include "Scene.h"
+#include "System.h"
 
 //**************************************************************************************
 //Constructor: starts the random generator
@@ -35,10 +36,6 @@ void Scene::Collide()
 	if (pGO != nullptr)
 	{
 		pGO->OnCollision(*_pPlayer);
-#ifdef _WIN32
-        system("pause");
-#elif __APPLE__
-        system("read -n 1 -s");
-#endif
+        System::pause();
 	}
 }

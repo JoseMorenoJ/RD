@@ -27,7 +27,7 @@ class GameObject
 public:
 	//TODO: constsructor with the EGameObjectType
 	GameObject();
-	~GameObject();
+	virtual ~GameObject();
 
 	void SetName(std::string);
 	void SetTag(std::string);
@@ -37,9 +37,8 @@ public:
 	std::string GetTag() const;
 	EGameObject GetType() const;
 
-
-	//not pure virtual: we don't want to implement OnCollision in objects that the player cannot crash with.
-	virtual void OnCollision(const GameObject &other) = 0;
+    // has to be defined in the sub classes.
+    virtual void OnCollision(const GameObject &other) = 0;
 
 protected:
 	EGameObject _type;

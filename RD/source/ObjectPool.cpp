@@ -46,7 +46,6 @@ void ObjectPool::GenerateNewPoolObject()
 	}
 	//Push back the next object.
 	this->_vGameObjects.push_back( this->GenerateNextObject() );
-
 }
 
 //**************************************************************************************

@@ -47,10 +47,10 @@ void GameManager::NewGame()
 	Player player(vehicle);
 
 	//Create the pool object
-	ObjectPool *pPool = new ObjectPool();
+    ObjectPool pool{};
 	
 	//Prepare te scenary 
-	Scene scene(pPool, &player);
+	Scene scene(&pool, &player);
 
 	//Create the Hub object
 	Hub HUB;
@@ -62,13 +62,14 @@ void GameManager::NewGame()
 	while (player.IsAlive())
 	{
 		//Generate a new object (side, traffic...)
- 		pPool->GenerateNewPoolObject();
+ 		pool.GenerateNewPoolObject();
 
 		//Update the HUB info
-		HUB.Update(pPool, player);
+		HUB.Update(pool, player);
 
 		HUB.Driving();
 		scene.Collide();
+        //TODO ? HUB.showCollision();
 
 	} //Game over
 
@@ -76,7 +77,7 @@ void GameManager::NewGame()
 	this->EndGame();
 
 	//Show result
-	HUB.Update(pPool, player);
+	HUB.Update(pool, player);
 	HUB.ShowEndGame( GetCash() );
 
 	return;

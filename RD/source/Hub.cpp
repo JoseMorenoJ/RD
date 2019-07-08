@@ -11,6 +11,7 @@
 #include "Hub.h"
 #include "GameManager.h"
 #include "SideObject.h"
+#include "System.h"
 
 //**************************************************************************************
 //default Constructor
@@ -22,15 +23,11 @@ Hub::~Hub(){}
 
 //**************************************************************************************
 //Rewrite the screen with the new info.
-void Hub::Update(ObjectPool* pPool, Player &player)
+void Hub::Update(ObjectPool &pool, Player &player)
 {
     //Clear the screen
-#ifdef _WIN32
-	system("cls");
-#elif __APPLE__
-    system("clear");
-#endif
-	DisplayGameObjects(pPool);
+    System::pause();
+	DisplayGameObjects(pool);
 
 	//Show the cash from the GM and the health from the player
 	ShowStats(player);
@@ -62,9 +59,9 @@ void Hub::ShowEndGame(int tCash) const
 
 //**************************************************************************************
 //Display all the objects in the pool.
-void Hub::DisplayGameObjects(ObjectPool* pPool)
+void Hub::DisplayGameObjects(ObjectPool& pool)
 {
-	for (const auto *p : pPool->GetvGameObjects())
+	for (const auto *p : pool.GetvGameObjects())
 	{
 		if (p != nullptr) //check that the Game Object is valid.
 		{
