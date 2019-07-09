@@ -9,29 +9,10 @@
 #ifndef RecklessDriver_System_h
 #define RecklessDriver_System_h
 
-namespace System {
-
-#ifdef _WIN32
-// Definitions for Windows commands
-void clear()
+namespace System
 {
-    system("cls");
-}
-void pause()
-{
-    system("pause");
-}
-
-#elif __APPLE__
-// Definitions for MacOS commands
-void clear()
-{
-    system("clear");
-}
-void pause()
-{
-    system("read -n 1 -s");
-}
-#endif
+    void clear();
+    void pause();
 } //namespace System
+
 #endif

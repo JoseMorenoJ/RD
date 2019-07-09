@@ -10,6 +10,7 @@
 
 #include "Player.h"
 #include "ObjectPool.h"
+#include "GameObject.h"
 
 class Scene
 {
@@ -24,7 +25,7 @@ private:
 	std::random_device _rd;
 	std::default_random_engine _engine;
 
-	ObjectPool* _pPool; //Object Pool
+    ObjectPool* _pPool; //Object Pool
 	Player* _pPlayer; //Player Car
 
 };

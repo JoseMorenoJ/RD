@@ -26,7 +26,7 @@ Hub::~Hub(){}
 void Hub::Update(ObjectPool &pool, Player &player)
 {
     //Clear the screen
-    System::pause();
+    System::clear();
 	DisplayGameObjects(pool);
 
 	//Show the cash from the GM and the health from the player
@@ -59,6 +59,7 @@ void Hub::ShowEndGame(int tCash) const
 
 //**************************************************************************************
 //Display all the objects in the pool.
+//TODO: Display them for real, in a position.
 void Hub::DisplayGameObjects(ObjectPool& pool)
 {
 	for (const auto *p : pool.GetvGameObjects())
