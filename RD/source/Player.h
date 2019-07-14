@@ -6,6 +6,7 @@
 
 #include "GameObject.h"
 #include "PlayerVehicle.h"
+#include "InputHandler.h"
 
 class Player :
 	public GameObject
@@ -29,4 +30,5 @@ public:
 private:
 	PlayerVehicle _vehicle; //pointer to the player's vehicle
 	int _health; //represents the health of the player
+    InputHandler _input;
 };
