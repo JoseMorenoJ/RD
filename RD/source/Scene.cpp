@@ -9,6 +9,7 @@
 
 #include "Scene.h"
 #include "System.h"
+#include "params.h"
 
 //**************************************************************************************
 //Constructor: starts the random generator
@@ -36,6 +37,21 @@ void Scene::Collide()
 	if (pGO != nullptr)
 	{
 		pGO->OnCollision(*_pPlayer);
-        System::pause();
 	}
+}
+
+//**************************************************************************************
+//Generate and return a random number between the number of game object types
+int const Scene::GetRand()
+{
+    //Generate a random distribution object for the collision.
+    std::uniform_int_distribution<int> dist(0, params::N_TOTAL_TYPES -1);
+    return dist(_engine);
+}
+
+//**************************************************************************************
+//Generate and return a random number between the number of game object types
+void Scene::AddObject()
+{
+    _pPool->GenerateNextObject(GetRand());
 }

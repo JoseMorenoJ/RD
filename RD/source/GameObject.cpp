@@ -6,9 +6,28 @@
 #include "GameObject.h"
 #include <iostream>
 
+//Operator ++ for the Game object type
+EGameObject operator++(EGameObject const e)
+{
+    switch (e) {
+        case NO_INIT:
+            return FIRE_HYDRANT;
+        case FIRE_HYDRANT:
+            return LETTER_BOX;
+        case LETTER_BOX:
+            return SEDAN;
+        case SEDAN:
+            return VAN;
+        case VAN:
+            return NO_INIT;
+        default:
+            return NO_INIT;
+    }
+}
+
 //**************************************************************************************
 //Constructor
-GameObject::GameObject() {}
+GameObject::GameObject(): _active(false), _x(0), _y(0){}
 	
 //**************************************************************************************
 //Destructor
@@ -29,4 +48,5 @@ std::string GameObject::GetTag() const { return this->_tag; }
 EGameObject GameObject::GetType() const { return this->_type; }
 unsigned int GameObject::GetX() const { return this->_x; }
 unsigned int GameObject::GetY() const { return this->_y; }
+bool GameObject::isActive() const { return _active; }
 

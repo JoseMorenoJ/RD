@@ -42,7 +42,7 @@ void GameManager::NewGame()
 {	
 	//Choose a vehicle //TODO: give a choice, actually
 	PlayerVehicle  vehicle = PlayerVehicle();
-		
+    
 	//Create a player object
 	Player player(vehicle);
 
@@ -62,15 +62,17 @@ void GameManager::NewGame()
 	while (player.IsAlive())
 	{
 		//Generate a new object (side, traffic...)
- 		pool.GenerateNewPoolObject();
+ 		scene.AddObject();
 
 		//Update the HUB info
 		HUB.Update(pool, player);
 
+        //Update player according to input
 		HUB.Driving();
-		scene.Collide();
-        //TODO ? HUB.showCollision();
-
+        
+        //Check the collission (money, damage, etc...)
+        scene.Collide();
+        
 	} //Game over
 
 	//Destroy the Scene and the objects.

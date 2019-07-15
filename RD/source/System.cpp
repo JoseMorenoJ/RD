@@ -25,12 +25,10 @@ namespace System {
     // Definitions for MacOS commands
     void clear()
     {
-        std::cout << "Mac OS definitions: Clear" << std::endl;
         system("clear");
     }
     void pause()
     {
-        std::cout << "Mac OS definitions: Pause" << std::endl;
         system("read -n 1 -s");
     }
 #endif

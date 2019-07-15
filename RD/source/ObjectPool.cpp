@@ -16,10 +16,18 @@
 
 //**************************************************************************************
 //Constructor
-ObjectPool::ObjectPool() : _engine(_rd())
+ObjectPool::ObjectPool()
 {
-	//Initialise the pool with 10 nullptrs
-	_vGameObjects = std::vector<GameObject *>(params::POOL_SIZE, nullptr);
+    _vGameObjects.push_back(new Sedan);
+    _vGameObjects.push_back(new Sedan);
+    _vGameObjects.push_back(new Sedan);
+    _vGameObjects.push_back(new Sedan);
+    _vGameObjects.push_back(new Van);
+    _vGameObjects.push_back(new Van);
+    _vGameObjects.push_back(new LetterBox);
+    _vGameObjects.push_back(new LetterBox);
+    _vGameObjects.push_back(new FireHydrant);
+    _vGameObjects.push_back(new FireHydrant);
 }
 
 //**************************************************************************************
@@ -32,45 +40,36 @@ std::vector<GameObject*> & ObjectPool::GetvGameObjects() { return _vGameObjects;
 
 //**************************************************************************************
 //Generate the objects in the scene.
-void ObjectPool::GenerateNewPoolObject()
+void ObjectPool::GenerateNextObject(const int aRand)
 {
-	//Check maximum game objects at a time
-	if (this->_vGameObjects.size() >= params::POOL_SIZE)
-	{
-		if (this->_vGameObjects[0] != nullptr)
-		{
-			//Free the object from the heap
-			delete this->_vGameObjects[0];
-		}
-		this->_vGameObjects.erase(this->_vGameObjects.begin()); //Erase the pointer to the oldest item.
-	}
-	//Push back the next object.
-	this->_vGameObjects.push_back( this->GenerateNextObject() );
+	//Choose the type depending on the aRand obtained.
+    EGameObject obj;
+    for (int i=0; i < aRand; i++)
+    {
+        ++obj;
+    }
+    
+    //Look for a non active GObject of that type in the pool
+    for (auto const e: _vGameObjects) {
+        if (e->GetType() == obj && !e->isActive()) {
+            //Activate it and initialise its position
+        }
+    }
+    
+    switch (aRand)
+    {
+        case 0://NO INIT Object, nothing happens with it.
+            return nullptr;
+        case 1://FireHydrant
+            return new FireHydrant();
+        case 2: //LetterBox
+            return new LetterBox();
+        case 3://Sedan
+            return new Sedan();
+        case 4: //Van
+            return new Van();
+        default: //Just in case we get out of the range.
+            return nullptr;
+    }
 }
 
-//**************************************************************************************
-//TODO: check what is the factory pattern and if we can use it here
-//Add the different Side Objects to the objects pool.
-GameObject * ObjectPool::GenerateNextObject()
-{
-	//Define const variables:
-	const int SWITCH_CASES = 5;
-
-	//Generate the objects depending on the uniform distribution
-	std::uniform_int_distribution<int> dist(0, SWITCH_CASES - 1);
-	switch (dist(this->_engine))
-	{
-	case 0://NO INIT Object, nothing happens with it.
-		return nullptr;
-	case 1://FireHydrant
-		return new FireHydrant();
-	case 2: //LetterBox
-		return new LetterBox();
-	case 3://Sedan
-		return new Sedan();
-	case 4: //Van
-		return new Van();
-	default: //Just in case we get out of the range.
-		return nullptr;
-	}
-}

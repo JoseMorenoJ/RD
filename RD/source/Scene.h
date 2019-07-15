@@ -19,9 +19,12 @@ public:
 	~Scene();
 
 	void Collide();
-
+    int const GetRand();
+    void AddObject();
+    
 private:
 	//Necessary for a random collision generation
+    //TODO Wrap it in the cool bind() thing (p.144)
 	std::random_device _rd;
 	std::default_random_engine _engine;
 

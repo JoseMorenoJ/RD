@@ -8,7 +8,11 @@ namespace params {
 	// System
 	const int N_TRAFFIC_TYPES = 2; //Sedan, Van
 	const int N_SIDEOBJECT_TYPES = 2; //Fire Hydrant, Letter Box
+    const int N_TOTAL_TYPES = 4;
 	const int POOL_SIZE = 10; //Max number of Game Objects at a time in the pool.
+    
+    const int SCREEN_HOR = 5; //Horizontal size of the screen grid
+    const int SCREEN_VER = 15; //Vertical size of the screen grid
 
 	// Player Atributes
 	const int PLAYER_INIT_HEALTH = 100;
