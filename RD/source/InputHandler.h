@@ -11,14 +11,18 @@
 
 #include <stdio.h>
 
+#include "GameObject.h"
 #include "Command.h"
 
 class InputHandler
 {
 public:
-    void handleInput();
+    InputHandler();
+    
+    void handleInput(GameObject*);
     
     //TODO relate keys with actions
+    Command* getAction();
     
 private:
     Command* _left;

@@ -15,9 +15,9 @@ public:
 	ObjectPool();
 	~ObjectPool();
 
-	std::vector<GameObject *> &GetvGameObjects(); //cannot be const cause it returns &value
+	std::vector<GameObject *> &getvGameObjects(); //cannot be const cause it returns &value
 
-    void GenerateNextObject(const int);
+    void generateNextObject(const int);
     
 private:
     //TODO Make it a list of unique pointers

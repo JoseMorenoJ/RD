@@ -12,10 +12,10 @@ Command::~Command(){}
 
 void MoveLeft::execute(GameObject& GO)
 {
-    GO.SetX( GO.GetX() + 1);
+    GO.setX( GO.getX() - 1);
 }
 
-void execute(GameObject& GO)
+void MoveRight::execute(GameObject& GO)
 {
-    GO.SetX( GO.GetX() - 1);
+    GO.setX( GO.getX() + 1);
 }

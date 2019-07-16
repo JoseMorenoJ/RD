@@ -31,21 +31,21 @@ public:
 	GameObject();
 	virtual ~GameObject();
 
-	void SetName(std::string);
-	void SetTag(std::string);
-	void SetType(EGameObject);
-    void SetX(unsigned int x);
-    void SetY(unsigned int y);
+	void setName(std::string);
+	void setTag(std::string);
+	void setType(EGameObject);
+    void setX(unsigned int x);
+    void setY(unsigned int y);
 
-	std::string GetName() const;
-	std::string GetTag() const;
-	EGameObject GetType() const;
-    unsigned int GetX() const;
-    unsigned int GetY() const;
+	std::string getName() const;
+	std::string getTag() const;
+	EGameObject getType() const;
+    unsigned int getX() const;
+    unsigned int getY() const;
     bool isActive() const;
 
     // has to be defined in the sub classes.
-    virtual void OnCollision(const GameObject &other) = 0;
+    virtual void onCollision(const GameObject &other) = 0;
 
 protected:
 	EGameObject _type;

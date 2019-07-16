@@ -13,20 +13,20 @@ public:
 	PlayerVehicle(const PlayerVehicle &vehicle);
 	~PlayerVehicle();
 
-	void SetName(std::string);
-	void SetHandling(int);
-	void SetTopSpeed(int);
-	void SetStrength(int);
+	void setName(std::string);
+	void setHandling(int);
+	void setTopSpeed(int);
+	void setStrength(int);
 
-	std::string GetName() const;
-	int GetHandling() const;
-	int GetTopSpeed() const;
-	int GetStrength() const;
+	std::string getName() const;
+	int getHandling() const;
+	int getTopSpeed() const;
+	int getStrength() const;
 
-	void Up();
-	void Down();
-	void Left();
-	void Right();
+	void up();
+	void down();
+	void left();
+	void right();
 
 private:
 	std::string _name; //unique name identifier

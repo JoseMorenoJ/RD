@@ -15,9 +15,9 @@ int main()
 {
 	do {
 
-		GameManager::GetInstance().NewGame();
+		GameManager::getInstance().newGame();
 
-	} while ( GameManager::GetInstance().PlayAgain() );
+	} while ( GameManager::getInstance().playAgain() );
 
 	std::cout << std::endl;
 	std::cout << "Thanks for playing, see you next time!" << std::endl;

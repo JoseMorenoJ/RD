@@ -13,16 +13,16 @@ public:
 	TrafficCar(int damage, int cash);
 	~TrafficCar(); 
 		
-	void SetDamage(int);
-	void SetCash(int);
-	void Crashed();
+	void setDamage(int);
+	void setCash(int);
+	void crashed();
 
-	int GetDamage() const;
-	int GetCash() const;
-	bool IsCrashed() const;
+	int getDamage() const;
+	int getCash() const;
+	bool isCrashed() const;
 	
 protected:
-	void Sparks();
+	void sparks();
 
 private:
 	int _damage;   //the damage to the player car

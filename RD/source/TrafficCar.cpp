@@ -14,8 +14,8 @@ TrafficCar::TrafficCar(int damage, int cash)
 	, _cash(cash)
 	,_bCrashed(false)
 {
-	SetName("");
-	SetTag("Traffic Car");
+	setName("");
+	setTag("Traffic Car");
 }
 
 //**************************************************************************************
@@ -23,20 +23,20 @@ TrafficCar::TrafficCar(int damage, int cash)
 TrafficCar::~TrafficCar() {}
 
 //**************************************************************************************
-//Setters
-void TrafficCar::SetDamage(int newDamage) { this->_damage = newDamage; }
-void TrafficCar::SetCash(int newCash) { this->_cash = newCash; }
-void TrafficCar::Crashed() { this->_bCrashed = true; }
+//setters
+void TrafficCar::setDamage(int newDamage) { this->_damage = newDamage; }
+void TrafficCar::setCash(int newCash) { this->_cash = newCash; }
+void TrafficCar::crashed() { this->_bCrashed = true; }
 
 //**************************************************************************************
-//Getters
-int TrafficCar::GetDamage() const { return this->_damage; }
-int TrafficCar::GetCash() const { return this->_cash; }
-bool TrafficCar::IsCrashed() const { return this->_bCrashed; }
+//getters
+int TrafficCar::getDamage() const { return this->_damage; }
+int TrafficCar::getCash() const { return this->_cash; }
+bool TrafficCar::isCrashed() const { return this->_bCrashed; }
 
 //**************************************************************************************
 //Called after a collision.
-void TrafficCar::Sparks()
+void TrafficCar::sparks()
 {
-	std::cout << "SPARKS COMING OUT FROM " << this->GetName() << "!!" << std::endl;
+	std::cout << "SPARKS COMING OUT FROM " << this->getName() << "!!" << std::endl;
 }

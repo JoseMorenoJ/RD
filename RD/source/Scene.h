@@ -18,9 +18,9 @@ public:
 	Scene(ObjectPool* pPool, Player* pPlayer);
 	~Scene();
 
-	void Collide();
-    int const GetRand();
-    void AddObject();
+	void collide();
+    int const getRand();
+    void addObject();
     
 private:
 	//Necessary for a random collision generation

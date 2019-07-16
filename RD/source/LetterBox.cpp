@@ -13,7 +13,7 @@
 //Constructor
 LetterBox::LetterBox() : SideObject(params::LETTERBOX_DAMAGE, params::LETTERBOX_CASH)
 {
-	SetName("Letter Box");
+	setName("Letter Box");
 }
 
 //**************************************************************************************
@@ -22,24 +22,24 @@ LetterBox::~LetterBox(){ std::cout << "~LetterBox()" << std::endl; }
 
 //**************************************************************************************
 //Specifies the behaviour when two GameObject collide.
-void LetterBox::OnCollision(const GameObject & other)
+void LetterBox::onCollision(const GameObject & other)
 {
-	if (other.GetName() == "Player")
+	if (other.getName() == "Player")
 	{
 		Player &p = (Player &)other;
-		if (this->IsCrashed()) //2nd collision
+		if (this->isCrashed()) //2nd collision
 		{
 			//Nothing happend in a second collision with a Side Object
-			std::cout << "### Run over a " << this->GetName() << std::endl;
+			std::cout << "### Run over a " << this->getName() << std::endl;
 		}
 		else //1st collision
 		{
 			std::cout << "### COLLISION -> Letter Box" << std::endl;
-			this->Crashed();
-			this->SetName("letters flying");
-			this->LettersFlying();
-			p.ApplyDamage(this->GetDamage(), this->GetCash());
-			this->Crashed();
+			this->crashed();
+			this->setName("letters flying");
+			this->lettersFlying();
+			p.applyDamage(this->getDamage(), this->getCash());
+			this->crashed();
 		}
 	}
 	return;
@@ -47,7 +47,7 @@ void LetterBox::OnCollision(const GameObject & other)
 
 //**************************************************************************************
 //Show on collision.
-void LetterBox::LettersFlying()
+void LetterBox::lettersFlying()
 {
 	std::cout << "LETTERS FLYING FROM THE LETTER BOX!!" << std::endl;
 }

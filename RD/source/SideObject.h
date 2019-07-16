@@ -13,13 +13,13 @@ public:
 	SideObject(int damage, int cash);
 	~SideObject();
 
-	void SetDamage(int);
-	void SetCash(int);
-	void Crashed();
+	void setDamage(int);
+	void setCash(int);
+	void crashed();
 
-	int GetDamage() const;
-	int GetCash() const;
-	bool IsCrashed() const;
+	int getDamage() const;
+	int getCash() const;
+	bool isCrashed() const;
 
 private:
 	int _damage; //damage done to the players car

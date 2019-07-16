@@ -25,24 +25,24 @@ Scene::~Scene(){}
 
 //**************************************************************************************
 //Generate a collision between the player and one of the objects in the pool.
-void Scene::Collide()
+void Scene::collide()
 {
 	//Generate a random distribution object for the collision.
-	std::uniform_int_distribution<int> dist(0, _pPool->GetvGameObjects().size()-1);
+	std::uniform_int_distribution<int> dist(0, _pPool->getvGameObjects().size()-1);
 		
 	GameObject *pGO = nullptr;
 	//Select a random object to colide
-	pGO = (_pPool->GetvGameObjects()) [dist(_engine)];
+	pGO = (_pPool->getvGameObjects()) [dist(_engine)];
 
 	if (pGO != nullptr)
 	{
-		pGO->OnCollision(*_pPlayer);
+		pGO->onCollision(*_pPlayer);
 	}
 }
 
 //**************************************************************************************
 //Generate and return a random number between the number of game object types
-int const Scene::GetRand()
+int const Scene::getRand()
 {
     //Generate a random distribution object for the collision.
     std::uniform_int_distribution<int> dist(0, params::N_TOTAL_TYPES -1);
@@ -51,7 +51,7 @@ int const Scene::GetRand()
 
 //**************************************************************************************
 //Generate and return a random number between the number of game object types
-void Scene::AddObject()
+void Scene::addObject()
 {
-    _pPool->GenerateNextObject(GetRand());
+    _pPool->generateNextObject(getRand());
 }

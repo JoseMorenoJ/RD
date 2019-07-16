@@ -23,21 +23,21 @@ Hub::~Hub(){}
 
 //**************************************************************************************
 //Rewrite the screen with the new info.
-void Hub::Update(ObjectPool &pool, Player &player)
+void Hub::update(ObjectPool &pool, Player &player)
 {
     //Clear the screen
     System::clear();
-	DisplayGameObjects(pool);
+	displayGameObjects(pool);
 
 	//Show the cash from the GM and the health from the player
-	ShowStats(player);
+	showStats(player);
 
 	return;
 }
 
 //**************************************************************************************
 //Shows that the player is driving on the screen.
-void Hub::Driving() const
+void Hub::driving() const
 {
 	std::cout << "\nPlayer is driving\n";
 	for (int i = 0; i < 10; ++i)
@@ -50,7 +50,7 @@ void Hub::Driving() const
 
 //**************************************************************************************
 //Screen called after the game is over, it shows the total points obtained.
-void Hub::ShowEndGame(int tCash) const
+void Hub::showEndGame(int tCash) const
 {
 	//TODO: show a list of the crashes
 
@@ -60,19 +60,19 @@ void Hub::ShowEndGame(int tCash) const
 //**************************************************************************************
 //Display all the objects in the pool.
 //TODO: Display them for real, in a position.
-void Hub::DisplayGameObjects(ObjectPool& pool)
+void Hub::displayGameObjects(ObjectPool& pool)
 {
-	for (const auto *p : pool.GetvGameObjects())
+	for (const auto *p : pool.getvGameObjects())
 	{
 		if (p != nullptr) //check that the Game Object is valid.
 		{
-			if (p->GetTag() == "Side Object")
+			if (p->getTag() == "Side Object")
 			{
-				std::cout << p->GetName() << "\t[X]";
+				std::cout << p->getName() << "\t[X]";
 			}
-			if (p->GetTag() == "Traffic Car")
+			if (p->getTag() == "Traffic Car")
 			{
-				std::cout << "\t\t\t[O]" << p->GetName();
+				std::cout << "\t\t\t[O]" << p->getName();
 			}
 		}
 		std::cout << std::endl;
@@ -82,10 +82,10 @@ void Hub::DisplayGameObjects(ObjectPool& pool)
 
 //**************************************************************************************
 //Show the health points and the accumulated money of the player in the screen.
-void Hub::ShowStats(const Player &player)
+void Hub::showStats(const Player &player)
 {
 	std::cout << "\n***************************************** Cash: $";
-	std::cout << GameManager::GetInstance().GetCash() << "\tHealth: ";
-	std::cout << std::max(player.GetHealth(), 0) << std::endl; //Never print less than 0
+	std::cout << GameManager::getInstance().getCash() << "\tHealth: ";
+	std::cout << std::max(player.getHealth(), 0) << std::endl; //Never print less than 0
 }
 

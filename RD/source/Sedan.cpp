@@ -13,7 +13,7 @@
 //This initializes the values with the constructor from TrafficCar
 Sedan::Sedan() : TrafficCar(params::SEDAN_DAMAGE, params::SEDAN_CASH)
 {
-	SetName("Sedan");
+	setName("Sedan");
 }
 
 //**************************************************************************************
@@ -22,24 +22,24 @@ Sedan::~Sedan(){ std::cout << "~Sedan()" << std::endl; }
 
 //**************************************************************************************
 //Behaviour after a collision.
-void Sedan::OnCollision(const GameObject &other)
+void Sedan::onCollision(const GameObject &other)
 {
-	if (other.GetName() == "Player")
+	if (other.getName() == "Player")
 	{
 		Player &p = (Player&)other;
-		if (this->IsCrashed()) //2nd collision
+		if (this->isCrashed()) //2nd collision
 		{
-			this->Sparks();
+			this->sparks();
 			std::cout << "### EXTRA COLLISION -> Sedan" << std::endl;
-			p.ApplyDamage(this->GetDamage(), 2*this->GetCash()); //Double cash
+			p.applyDamage(this->getDamage(), 2 * this->getCash()); //Double cash
 		}
 		else //1st collision
 		{
-			this->Sparks();
+			this->sparks();
 			std::cout << "### COLLISION -> Sedan" << std::endl;
-			this->Crashed();
-			this->SetName("bumped Sedan");
-			p.ApplyDamage(this->GetDamage(), this->GetCash());
+			this->crashed();
+			this->setName("bumped Sedan");
+			p.applyDamage(this->getDamage(), this->getCash());
 		}
 	}
 	return;

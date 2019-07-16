@@ -19,12 +19,12 @@ GameManager::GameManager(){}
 GameManager::~GameManager(){}
 
 //**************************************************************************************
-//Getter to _cash. This cash is the total cash that the player has accumulated.
-int GameManager::GetCash() const { return this->_cashAccum; }
+//getter to _cash. This cash is the total cash that the player has accumulated.
+int GameManager::getCash() const { return this->_cashAccum; }
 
 //**************************************************************************************
-//Get the instance of the game manager to be able to accumulate the cash.
-GameManager& GameManager::GetInstance()
+//get the instance of the game manager to be able to accumulate the cash.
+GameManager& GameManager::getInstance()
 {
 	//Singleton: Structure that assure only one instance of the class.
 	//Meyer's Singleton:
@@ -34,11 +34,11 @@ GameManager& GameManager::GetInstance()
 
 //**************************************************************************************
 //Add some amount to the total cash.
-void GameManager::AddCash(int amount) { this->_cashAccum += amount; }
+void GameManager::addCash(int amount) { this->_cashAccum += amount; }
 
 //**************************************************************************************
 //Generates the new game. The main loop and logic of the game.
-void GameManager::NewGame()
+void GameManager::newGame()
 {	
 	//Choose a vehicle //TODO: give a choice, actually
 	PlayerVehicle  vehicle = PlayerVehicle();
@@ -55,39 +55,41 @@ void GameManager::NewGame()
 	//Create the Hub object
 	Hub HUB;
 
-	//Set initial cash to 0
-	ResetCash();
+	//set initial cash to 0
+	resetCash();
 
 	//Run the loop
-	while (player.IsAlive())
+	while (player.isAlive())
 	{
 		//Generate a new object (side, traffic...)
- 		scene.AddObject();
+ 		scene.addObject();
+        
+        //Update the objects
+        player.update();
 
 		//Update the HUB info
-		HUB.Update(pool, player);
-
+		HUB.update(pool, player);
         //Update player according to input
-		HUB.Driving();
+		HUB.driving();
         
         //Check the collission (money, damage, etc...)
-        scene.Collide();
+        scene.collide();
         
 	} //Game over
 
 	//Destroy the Scene and the objects.
-	this->EndGame();
+	this->endGame();
 
 	//Show result
-	HUB.Update(pool, player);
-	HUB.ShowEndGame( GetCash() );
+	HUB.update(pool, player);
+	HUB.showEndGame( getCash() );
 
 	return;
 }
 
 //**************************************************************************************
 //Prints out the scores info once the game is over.
-void GameManager::EndGame()
+void GameManager::endGame()
 {
 	//TODO Implement this function
 	//Erase the instances to erase //Makes no sense to destroy it if we will play again...
@@ -100,7 +102,7 @@ void GameManager::EndGame()
 
 //**************************************************************************************
 //Asks the player to play again.
-bool GameManager::PlayAgain() //TODO Integrate the question in the HUB/Graphics
+bool GameManager::playAgain() //TODO Integrate the question in the HUB/Graphics
 {
 	char answer;
 
@@ -115,5 +117,5 @@ bool GameManager::PlayAgain() //TODO Integrate the question in the HUB/Graphics
 }
 
 //**************************************************************************************
-//Set cash to 0 when a new game starts.
-void GameManager::ResetCash() { this->_cashAccum = 0; }
+//set cash to 0 when a new game starts.
+void GameManager::resetCash() { this->_cashAccum = 0; }

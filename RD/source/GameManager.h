@@ -11,21 +11,21 @@ class GameManager
 public:
 	~GameManager();
 
-	int GetCash() const;
-	static GameManager & GetInstance();
+	int getCash() const;
+	static GameManager & getInstance();
 
-	void AddCash(int);
+	void addCash(int);
 		
-	void NewGame();
-	void EndGame();
-	bool PlayAgain();
+	void newGame();
+	void endGame();
+	bool playAgain();
 
 private:
 	int _cashAccum;	//Total cash accumulated
 
-	GameManager();  //We make it private so we cannot call GetInstance from out the class.
+	GameManager();  //We make it private so we cannot call getInstance from out the class.
 		
 	//Helper methods
-	void ResetCash(); 
+	void resetCash();
 
 };

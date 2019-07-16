@@ -13,7 +13,7 @@
 //This initializes the values with the constructor from TrafficCar
 Van::Van() : TrafficCar(params::VAN_DAMAGE, params::VAN_CASH)
 {
-	SetName("Van");
+	setName("Van");
 }
 
 //**************************************************************************************
@@ -22,24 +22,24 @@ Van::~Van() { std::cout << "~Van()" << std::endl; }
 
 //**************************************************************************************
 //Behaviour after a collision.
-void Van::OnCollision(const GameObject &other)
+void Van::onCollision(const GameObject &other)
 {
-	if (other.GetName() == "Player")
+	if (other.getName() == "Player")
 	{
 		Player &p = (Player&)other;
-		if (this->IsCrashed()) //2nd collision
+		if (this->isCrashed()) //2nd collision
 		{
-			this->Sparks();
+			this->sparks();
 			std::cout << "### EXTRA COLLISION -> Van" << std::endl;
-			p.ApplyDamage(this->GetDamage(), 2*this->GetCash()); //Double cash
+			p.applyDamage(this->getDamage(), 2*this->getCash()); //Double cash
 		}
 		else //1st collision
 		{
-			this->Sparks();
+			this->sparks();
 			std::cout << "### COLLISION -> Van" << std::endl;
-			this->Crashed();
-			this->SetName("bumped Van");
-			p.ApplyDamage(this->GetDamage(), this->GetCash());
+			this->crashed();
+			this->setName("bumped Van");
+			p.applyDamage(this->getDamage(), this->getCash());
 		}
 	}
 	return;

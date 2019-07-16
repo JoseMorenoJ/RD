@@ -34,19 +34,19 @@ GameObject::GameObject(): _active(false), _x(0), _y(0){}
 GameObject::~GameObject() {}
 
 //**************************************************************************************
-//Setters:
-void GameObject::SetName(std::string newName) { this->_name = newName; }
-void GameObject::SetTag(std::string newTag) { this->_tag = newTag; }
-void GameObject::SetType(EGameObject newType) { this->_type = newType; }
-void GameObject::SetX(unsigned int x) { this->_x = x; }
-void GameObject::SetY(unsigned int y) { this->_y = y; }
+//setters:
+void GameObject::setName(std::string newName) { this->_name = newName; }
+void GameObject::setTag(std::string newTag) { this->_tag = newTag; }
+void GameObject::setType(EGameObject newType) { this->_type = newType; }
+void GameObject::setX(unsigned int x) { this->_x = x; }
+void GameObject::setY(unsigned int y) { this->_y = y; }
 
 //**************************************************************************************
 //Getters:
-std::string GameObject::GetName() const { return this->_name; }
-std::string GameObject::GetTag() const { return this->_tag; }
-EGameObject GameObject::GetType() const { return this->_type; }
-unsigned int GameObject::GetX() const { return this->_x; }
-unsigned int GameObject::GetY() const { return this->_y; }
+std::string GameObject::getName() const { return this->_name; }
+std::string GameObject::getTag() const { return this->_tag; }
+EGameObject GameObject::getType() const { return this->_type; }
+unsigned int GameObject::getX() const { return this->_x; }
+unsigned int GameObject::getY() const { return this->_y; }
 bool GameObject::isActive() const { return _active; }
 

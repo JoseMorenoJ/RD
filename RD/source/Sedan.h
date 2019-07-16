@@ -13,5 +13,5 @@ public:
 	Sedan();
 	~Sedan();
 
-	void OnCollision(const GameObject &other) override;
+	void onCollision(const GameObject &other) override;
 };

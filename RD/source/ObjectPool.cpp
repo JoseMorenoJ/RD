@@ -35,12 +35,12 @@ ObjectPool::ObjectPool()
 ObjectPool::~ObjectPool(){}
 
 //**************************************************************************************
-//Getters
-std::vector<GameObject*> & ObjectPool::GetvGameObjects() { return _vGameObjects; }
+//getters
+std::vector<GameObject*> & ObjectPool::getvGameObjects() { return _vGameObjects; }
 
 //**************************************************************************************
 //Generate the objects in the scene.
-void ObjectPool::GenerateNextObject(const int aRand)
+void ObjectPool::generateNextObject(const int aRand)
 {
 	//Choose the type depending on the aRand obtained.
     EGameObject obj;
@@ -50,26 +50,17 @@ void ObjectPool::GenerateNextObject(const int aRand)
     }
     
     //Look for a non active GObject of that type in the pool
-    for (auto const e: _vGameObjects) {
-        if (e->GetType() == obj && !e->isActive()) {
-            //Activate it and initialise its position
-        }
-    }
-    
-    switch (aRand)
+    for (auto const e: _vGameObjects)
     {
-        case 0://NO INIT Object, nothing happens with it.
-            return nullptr;
-        case 1://FireHydrant
-            return new FireHydrant();
-        case 2: //LetterBox
-            return new LetterBox();
-        case 3://Sedan
-            return new Sedan();
-        case 4: //Van
-            return new Van();
-        default: //Just in case we get out of the range.
-            return nullptr;
+        if (e->getType() == obj && !e->isActive())
+        {
+            //Activate it and initialise its position
+            e->setY(params::SCREEN_VER);
+            if(e->getType() == SEDAN || e->getType() == VAN)
+                e->setX(aRand % 3 + 1); //Start the traffic cars inside the road
+            if(e->getType() == LETTER_BOX || e->getType() == FIRE_HYDRANT)
+                e->setY((aRand % 2) ? 0 : params::SCREEN_HOR); //Side object in the sides
+        }
     }
 }
 

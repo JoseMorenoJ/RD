@@ -16,14 +16,14 @@ public:
 	Hub();
 	~Hub();
 
-	void Update(ObjectPool &pool, Player &player);
-	void Driving() const;
-	void ShowEndGame(int) const;
+	void update(ObjectPool &pool, Player &player);
+	void driving() const;
+	void showEndGame(int) const;
 
 private:
 
 	//Some Helper functions
-	void DisplayGameObjects(ObjectPool &pool);
-	void ShowStats(const Player &player);
+	void displayGameObjects(ObjectPool &pool);
+	void showStats(const Player &player);
 
 };
