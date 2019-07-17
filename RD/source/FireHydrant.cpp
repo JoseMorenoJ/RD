@@ -35,7 +35,7 @@ void FireHydrant::onCollision(const GameObject &other)
 		else //1st collision
 		{
 			std::cout << "### COLLISION -> Fire Hydrant" << std::endl;
-			this->crashed();
+			this->_bCrashed = true;
 			this->setName("water fountain");
 			this->fountain();
 			p.applyDamage(this->getDamage(), this->getCash());

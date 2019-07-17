@@ -36,6 +36,7 @@ public:
 	void setType(EGameObject);
     void setX(unsigned int x);
     void setY(unsigned int y);
+    void activate();
 
 	std::string getName() const;
 	std::string getTag() const;
@@ -43,16 +44,23 @@ public:
     unsigned int getX() const;
     unsigned int getY() const;
     bool isActive() const;
-
+    bool isCrashed() const;
+    
     // has to be defined in the sub classes.
     virtual void onCollision(const GameObject &other) = 0;
+    virtual void update();
+    
+    // an object has reached the end, disable it.
+    void reset();
 
 protected:
 	EGameObject _type;
+    bool _bCrashed; // if it is crashed it will give the bonus points
+
 private:
 	std::string _name; //To uniquely identify a game object
 	std::string _tag;  //To uniquely identify a game object group: Traffic, Side Objects, Player.
-    bool _active; //Is it in or out of the screen
+    bool _bActive; //Is it in or out of the screen
     //Position in the grid
     unsigned int _x;
     unsigned int _y;

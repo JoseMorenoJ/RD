@@ -27,7 +27,7 @@ EGameObject operator++(EGameObject const e)
 
 //**************************************************************************************
 //Constructor
-GameObject::GameObject(): _active(false), _x(0), _y(0){}
+GameObject::GameObject(): _bActive(false), _bCrashed(false), _x(0), _y(0){}
 	
 //**************************************************************************************
 //Destructor
@@ -40,6 +40,7 @@ void GameObject::setTag(std::string newTag) { this->_tag = newTag; }
 void GameObject::setType(EGameObject newType) { this->_type = newType; }
 void GameObject::setX(unsigned int x) { this->_x = x; }
 void GameObject::setY(unsigned int y) { this->_y = y; }
+void GameObject::activate(){ _bActive = true; }
 
 //**************************************************************************************
 //Getters:
@@ -48,5 +49,20 @@ std::string GameObject::getTag() const { return this->_tag; }
 EGameObject GameObject::getType() const { return this->_type; }
 unsigned int GameObject::getX() const { return this->_x; }
 unsigned int GameObject::getY() const { return this->_y; }
-bool GameObject::isActive() const { return _active; }
+bool GameObject::isCrashed() const { return this->_bCrashed; }
+bool GameObject::isActive() const { return _bActive; }
 
+//**************************************************************************************
+void GameObject::update()
+{
+    //If there is no complete object, do nothing.
+}
+
+void GameObject::reset()
+{
+    //it reached the end. Disable.
+    _bActive = false;
+    setY(0);
+    setX(0);
+    
+}

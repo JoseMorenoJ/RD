@@ -12,6 +12,7 @@ public:
 	~GameManager();
 
 	int getCash() const;
+    static int CLOCK();
 	static GameManager & getInstance();
 
 	void addCash(int);
@@ -22,6 +23,7 @@ public:
 
 private:
 	int _cashAccum;	//Total cash accumulated
+    int _clock = 0; //Keep track of the turn
 
 	GameManager();  //We make it private so we cannot call getInstance from out the class.
 		

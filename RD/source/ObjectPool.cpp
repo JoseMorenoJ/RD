@@ -55,12 +55,24 @@ void ObjectPool::generateNextObject(const int aRand)
         if (e->getType() == obj && !e->isActive())
         {
             //Activate it and initialise its position
+            e->activate();
             e->setY(params::SCREEN_VER);
             if(e->getType() == SEDAN || e->getType() == VAN)
                 e->setX(aRand % 3 + 1); //Start the traffic cars inside the road
             if(e->getType() == LETTER_BOX || e->getType() == FIRE_HYDRANT)
                 e->setY((aRand % 2) ? 0 : params::SCREEN_HOR); //Side object in the sides
+            break; //stop iterating
         }
     }
 }
 
+void ObjectPool::updateObjects()
+{
+    for(auto obj: _vGameObjects)
+    {
+        if (obj->isActive())
+        {
+            obj->update();
+        }
+    }
+}

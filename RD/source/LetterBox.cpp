@@ -35,11 +35,10 @@ void LetterBox::onCollision(const GameObject & other)
 		else //1st collision
 		{
 			std::cout << "### COLLISION -> Letter Box" << std::endl;
-			this->crashed();
+			this->_bCrashed = true;
 			this->setName("letters flying");
 			this->lettersFlying();
 			p.applyDamage(this->getDamage(), this->getCash());
-			this->crashed();
 		}
 	}
 	return;

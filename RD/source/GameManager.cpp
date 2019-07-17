@@ -9,7 +9,6 @@
 #include "Scene.h"
 #include "Hub.h"
 
-
 //**************************************************************************************
 //default Constructor
 GameManager::GameManager(){}
@@ -21,6 +20,11 @@ GameManager::~GameManager(){}
 //**************************************************************************************
 //getter to _cash. This cash is the total cash that the player has accumulated.
 int GameManager::getCash() const { return this->_cashAccum; }
+
+int GameManager::CLOCK()
+{
+    return getInstance()._clock;
+}
 
 //**************************************************************************************
 //get the instance of the game manager to be able to accumulate the cash.
@@ -61,14 +65,19 @@ void GameManager::newGame()
 	//Run the loop
 	while (player.isAlive())
 	{
+        //keep track of the clock
+        ++_clock;
+        
 		//Generate a new object (side, traffic...)
- 		scene.addObject();
+        if (CLOCK() % 10 == 0)
+            scene.addObject();
         
         //Update the objects
+        pool.updateObjects();
         player.update();
 
 		//Update the HUB info
-		HUB.update(pool, player);
+		HUB.refresh(pool, player);
         //Update player according to input
 		HUB.driving();
         
@@ -81,7 +90,7 @@ void GameManager::newGame()
 	this->endGame();
 
 	//Show result
-	HUB.update(pool, player);
+	HUB.refresh(pool, player);
 	HUB.showEndGame( getCash() );
 
 	return;

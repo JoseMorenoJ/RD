@@ -37,7 +37,7 @@ void Sedan::onCollision(const GameObject &other)
 		{
 			this->sparks();
 			std::cout << "### COLLISION -> Sedan" << std::endl;
-			this->crashed();
+			this->_bCrashed = true;
 			this->setName("bumped Sedan");
 			p.applyDamage(this->getDamage(), this->getCash());
 		}

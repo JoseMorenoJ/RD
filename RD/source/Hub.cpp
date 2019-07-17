@@ -23,7 +23,7 @@ Hub::~Hub(){}
 
 //**************************************************************************************
 //Rewrite the screen with the new info.
-void Hub::update(ObjectPool &pool, Player &player)
+void Hub::refresh(ObjectPool &pool, Player &player)
 {
     //Clear the screen
     System::clear();
@@ -66,16 +66,12 @@ void Hub::displayGameObjects(ObjectPool& pool)
 	{
 		if (p != nullptr) //check that the Game Object is valid.
 		{
-			if (p->getTag() == "Side Object")
-			{
-				std::cout << p->getName() << "\t[X]";
-			}
-			if (p->getTag() == "Traffic Car")
-			{
-				std::cout << "\t\t\t[O]" << p->getName();
-			}
+            if (p->isActive()) std::cout << "\t[O]";
+            else               std::cout << "\t[X]";
+            std::cout << "x:" << p->getX() << "y:" << p->getY();
+            std::cout << p->getName();
 		}
-		std::cout << std::endl;
+        std::cout << std::endl;
 	}
 	return;
 }
@@ -87,5 +83,6 @@ void Hub::showStats(const Player &player)
 	std::cout << "\n***************************************** Cash: $";
 	std::cout << GameManager::getInstance().getCash() << "\tHealth: ";
 	std::cout << std::max(player.getHealth(), 0) << std::endl; //Never print less than 0
+    std::cout << "pos (" << player.getX() << "," << player.getX() << ")" << std::endl;
 }
 

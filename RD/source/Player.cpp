@@ -15,6 +15,8 @@ Player::Player()
 	_vehicle = PlayerVehicle();
 	setName("Player");
 	setTag("Player");
+    setX(2);
+    setY(0);
 }
 Player::Player(PlayerVehicle &vehicle)
 	: _health(params::PLAYER_INIT_HEALTH)

@@ -12,7 +12,6 @@
 TrafficCar::TrafficCar(int damage, int cash)
 	:_damage(damage)
 	, _cash(cash)
-	,_bCrashed(false)
 {
 	setName("");
 	setTag("Traffic Car");
@@ -26,13 +25,23 @@ TrafficCar::~TrafficCar() {}
 //setters
 void TrafficCar::setDamage(int newDamage) { this->_damage = newDamage; }
 void TrafficCar::setCash(int newCash) { this->_cash = newCash; }
-void TrafficCar::crashed() { this->_bCrashed = true; }
 
 //**************************************************************************************
 //getters
 int TrafficCar::getDamage() const { return this->_damage; }
 int TrafficCar::getCash() const { return this->_cash; }
-bool TrafficCar::isCrashed() const { return this->_bCrashed; }
+
+void TrafficCar::update()
+{
+    if (getY() == 0)
+    {
+        reset();
+    }
+    else
+    {
+        setY(getY() - 1);
+    }
+}
 
 //**************************************************************************************
 //Called after a collision.

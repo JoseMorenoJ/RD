@@ -15,11 +15,11 @@ public:
 		
 	void setDamage(int);
 	void setCash(int);
-	void crashed();
 
 	int getDamage() const;
 	int getCash() const;
-	bool isCrashed() const;
+    
+    void update() override;
 	
 protected:
 	void sparks();
@@ -27,6 +27,5 @@ protected:
 private:
 	int _damage;   //the damage to the player car
 	int _cash;	   //cash given after crash
-	bool _bCrashed; //Wether is enabled or disabled
-		
+    
 };

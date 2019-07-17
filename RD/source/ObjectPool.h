@@ -18,6 +18,7 @@ public:
 	std::vector<GameObject *> &getvGameObjects(); //cannot be const cause it returns &value
 
     void generateNextObject(const int);
+    void updateObjects();
     
 private:
     //TODO Make it a list of unique pointers

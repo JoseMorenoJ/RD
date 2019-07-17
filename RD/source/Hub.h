@@ -16,7 +16,7 @@ public:
 	Hub();
 	~Hub();
 
-	void update(ObjectPool &pool, Player &player);
+	void refresh(ObjectPool &pool, Player &player);
 	void driving() const;
 	void showEndGame(int) const;
 
