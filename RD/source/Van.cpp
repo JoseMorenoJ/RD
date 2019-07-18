@@ -20,7 +20,7 @@ Van::Van() : TrafficCar(params::VAN_DAMAGE, params::VAN_CASH)
 
 //**************************************************************************************
 //default Destructor
-Van::~Van() { std::cout << "~Van()" << std::endl; }
+Van::~Van() {}
 
 void Van::update()
 {
@@ -59,5 +59,4 @@ void Van::onCollision(const GameObject &other)
 			p.applyDamage(this->getDamage(), this->getCash());
 		}
 	}
-	return;
 }

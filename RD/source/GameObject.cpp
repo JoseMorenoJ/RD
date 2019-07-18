@@ -62,5 +62,4 @@ void GameObject::reset()
     _bActive = false;
     setY(0);
     setX(0);
-    
 }

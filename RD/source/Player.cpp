@@ -24,6 +24,7 @@ Player::Player(PlayerVehicle &vehicle)
 {
 	setName("Player");
 	setTag("Player");
+    setChar('O');
 }
 
 //**************************************************************************************
@@ -48,7 +49,9 @@ bool Player::isAlive() const
 void Player::update()
 {
     //Add a return type here, the event (key stroke)
-    _input.handleInput(this);
+    if (GameManager::getInstance().CLOCK() % params::SEDAN_HANDLING == 0) {
+        _input.handleInput(this);
+    }
 }
 //**************************************************************************************
 //Mouvement for the player relates directly with the Player Vehicle mouvement functions.

@@ -20,7 +20,7 @@ Sedan::Sedan() : TrafficCar(params::SEDAN_DAMAGE, params::SEDAN_CASH)
 
 //**************************************************************************************
 //default Destructor
-Sedan::~Sedan(){ std::cout << "~Sedan()" << std::endl; }
+Sedan::~Sedan(){}
 
 void Sedan::update()
 {
@@ -61,5 +61,4 @@ void Sedan::onCollision(const GameObject &other)
 			p.applyDamage(this->getDamage(), this->getCash());
 		}
 	}
-	return;
 }

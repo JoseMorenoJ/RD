@@ -121,5 +121,5 @@ bool GameManager::playAgain() //TODO Integrate the question in the HUB/Graphics
 }
 
 //**************************************************************************************
-//set cash to 0 when a new game starts.
+//Set cash to 0 when a new game starts.
 void GameManager::resetCash() { this->_cashAccum = 0; }

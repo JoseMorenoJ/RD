@@ -20,7 +20,7 @@ LetterBox::LetterBox() : SideObject(params::LETTERBOX_DAMAGE, params::LETTERBOX_
 
 //**************************************************************************************
 //default Destructor
-LetterBox::~LetterBox(){ std::cout << "~LetterBox()" << std::endl; }
+LetterBox::~LetterBox(){}
 
 void LetterBox::update()
 {
@@ -60,7 +60,6 @@ void LetterBox::onCollision(const GameObject & other)
 			p.applyDamage(this->getDamage(), this->getCash());
 		}
 	}
-	return;
 }
 
 //**************************************************************************************

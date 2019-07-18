@@ -22,10 +22,10 @@ public:
 	void showEndGame(int) const;
 
 private:
-
     char _display[params::SCREEN_HOR][params::SCREEN_VER];
+    
 	//Some Helper functions
-	void displayGameObjects(ObjectPool &pool);
+	void displayGameObjects(ObjectPool &, Player &);
 	void showStats(const Player &player);
     void resetDisplay();
 

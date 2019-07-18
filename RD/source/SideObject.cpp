@@ -13,7 +13,6 @@ SideObject::SideObject(int damage, int cash)
 {
 	setName("");
 	setTag("Side Object");
-
 }
 	
 //**************************************************************************************

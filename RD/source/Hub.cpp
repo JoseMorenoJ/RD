@@ -27,7 +27,7 @@ void Hub::refresh(ObjectPool &pool, Player &player)
 {
     //Clear the screen
     System::clear();
-	displayGameObjects(pool);
+	displayGameObjects(pool, player);
 
 	//Show the cash from the GM and the health from the player
 	showStats(player);
@@ -60,17 +60,24 @@ void Hub::showEndGame(int tCash) const
 //**************************************************************************************
 //Display all the objects in the pool.
 //TODO: Display them for real, in a position.
-void Hub::displayGameObjects(ObjectPool& pool)
+void Hub::displayGameObjects(ObjectPool& pool, Player& player)
 {
     resetDisplay();
-	for (const auto *p : pool.getvGameObjects())
+    
+	//Game Objects
+    for (const auto *p : pool.getvGameObjects())
 	{
 		if (p->isActive()) //check that the Game Object is on screen
 		{
             _display[p->getX()][p->getY()] = p->getChar();
         }
 	}
-    for (int y = params::SCREEN_VER-1; y != 0; --y)
+    
+    //Player
+    _display[player.getX()][player.getY()] = player.getChar();
+    
+    //Print all
+    for (int y = params::SCREEN_VER-1; y >= 0; --y)
     {
         std::cout << "---  ";
         for (int x = 0; x < params::SCREEN_HOR; ++x)
@@ -95,7 +102,6 @@ void Hub::showStats(const Player &player)
 {
 	std::cout << "\nCash: $" << GameManager::getInstance().getCash();
 	std::cout << "\tHealth: " << std::max(player.getHealth(), 0) << std::endl;
-    std::cout << "pos (" << player.getX() << "," << player.getY() << ")" << std::endl;
 }
 
 inline void Hub::resetDisplay()

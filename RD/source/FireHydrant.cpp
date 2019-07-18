@@ -20,7 +20,7 @@ FireHydrant::FireHydrant(): SideObject(params::FIREHYDRANT_DAMAGE, params::FIREH
 
 //**************************************************************************************
 //default Destructor
-FireHydrant::~FireHydrant() { std::cout << "~FireHydrant()" << std::endl; }
+FireHydrant::~FireHydrant() {}
 
 void FireHydrant::update()
 {
