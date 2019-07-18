@@ -72,6 +72,7 @@ void Hub::displayGameObjects(ObjectPool& pool)
 	}
     for (int y = 0; y < params::SCREEN_VER; ++y)
     {
+        std::cout << "---  ";
         for (int x = 0; x < params::SCREEN_HOR; ++x)
         {
             if (x == params::SCREEN_HOR - 1)
@@ -84,7 +85,7 @@ void Hub::displayGameObjects(ObjectPool& pool)
                 std::cout << '|';
             }
         }
-        std::cout << std::endl;
+        std::cout << " ---" << std::endl;
     }
 }
 
@@ -92,9 +93,8 @@ void Hub::displayGameObjects(ObjectPool& pool)
 //Show the health points and the accumulated money of the player in the screen.
 void Hub::showStats(const Player &player)
 {
-	std::cout << "\n***************************************** Cash: $";
-	std::cout << GameManager::getInstance().getCash() << "\tHealth: ";
-	std::cout << std::max(player.getHealth(), 0) << std::endl; //Never print less than 0
+	std::cout << "\nCash: $" << GameManager::getInstance().getCash();
+	std::cout << "\tHealth: " << std::max(player.getHealth(), 0) << std::endl;
     std::cout << "pos (" << player.getX() << "," << player.getY() << ")" << std::endl;
 }
 
