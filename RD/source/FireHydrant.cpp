@@ -14,6 +14,7 @@
 //Constructor
 FireHydrant::FireHydrant(): SideObject(params::FIREHYDRANT_DAMAGE, params::FIREHYDRANT_CASH)
 {
+    setType(EGameObject::LETTER_BOX);
 	setName("Fire Hydrant");
     setChar('F');
 }

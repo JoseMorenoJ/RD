@@ -14,6 +14,7 @@
 //This initializes the values with the constructor from TrafficCar
 Van::Van() : TrafficCar(params::VAN_DAMAGE, params::VAN_CASH)
 {
+    setType(EGameObject::VAN);
 	setName("Van");
     setChar('V');
 }

@@ -22,7 +22,7 @@ typedef enum
 	VAN = 22
 }EGameObject;
 
-EGameObject operator++(EGameObject const);
+EGameObject nextGO(EGameObject& e);
 
 class GameObject
 {
@@ -34,16 +34,16 @@ public:
 	void setName(std::string);
 	void setTag(std::string);
 	void setType(EGameObject);
-    void setX(unsigned int x);
-    void setY(unsigned int y);
+    void setX(const int x);
+    void setY(const int y);
     void activate();
-    void setChar(char const);
+    void setChar(const char);
 
 	std::string getName() const;
 	std::string getTag() const;
 	EGameObject getType() const;
-    unsigned int getX() const;
-    unsigned int getY() const;
+    int getX() const;
+    int getY() const;
     bool isActive() const;
     bool isCrashed() const;
     char getChar() const;
@@ -56,16 +56,16 @@ public:
     void reset();
 
 protected:
-	EGameObject _type;
     bool _bCrashed; // if it is crashed it will give the bonus points
 
 private:
+    EGameObject _type;
 	std::string _name; //To uniquely identify a game object
 	std::string _tag;  //To uniquely identify a game object group: Traffic, Side Objects, Player.
     bool _bActive; //Is it in or out of the screen
     //Position in the grid
-    unsigned int _x;
-    unsigned int _y;
+    int _x;
+    int _y;
     char _char;
 		
 };

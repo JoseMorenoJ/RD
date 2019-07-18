@@ -94,6 +94,7 @@ void Hub::displayGameObjects(ObjectPool& pool, Player& player)
         }
         std::cout << " ---" << std::endl;
     }
+    std::cout << "Size of pool:" << pool.getvGameObjects().size() << std::endl;
 }
 
 //**************************************************************************************

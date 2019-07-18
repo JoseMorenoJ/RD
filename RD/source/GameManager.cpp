@@ -74,8 +74,7 @@ void GameManager::newGame()
         
         //Update the objects
         pool.updateObjects();
-        
-            player.update();
+        player.update();
 
 		//Update the HUB info
 		HUB.refresh(pool, player);

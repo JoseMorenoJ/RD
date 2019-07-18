@@ -18,7 +18,6 @@ public:
 	Scene(ObjectPool* pPool, Player* pPlayer);
 	~Scene();
 
-	void collide();
     int const getRand();
     void addObject();
     

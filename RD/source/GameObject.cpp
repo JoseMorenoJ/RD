@@ -3,26 +3,34 @@
 		The game manager will interface with them.
 */
 
-#include "GameObject.h"
 #include <iostream>
 
+#include "GameObject.h"
+
 //Operator ++ for the Game object type
-EGameObject operator++(EGameObject const e)
+EGameObject nextGO(EGameObject& e)
 {
     switch (e) {
         case EGameObject::NO_INIT:
-            return EGameObject::FIRE_HYDRANT;
+            e = EGameObject::FIRE_HYDRANT;
+            break;
         case EGameObject::FIRE_HYDRANT:
-            return EGameObject::LETTER_BOX;
+            e = EGameObject::LETTER_BOX;
+            break;
         case EGameObject::LETTER_BOX:
-            return EGameObject::SEDAN;
+            e = EGameObject::SEDAN;
+            break;
         case EGameObject::SEDAN:
-            return EGameObject::VAN;
+            e = EGameObject::VAN;
+            break;
         case EGameObject::VAN:
-            return EGameObject::FIRE_HYDRANT;
+            e = EGameObject::FIRE_HYDRANT;
+            break;
         default:
-            return EGameObject::NO_INIT;
+            e = EGameObject::NO_INIT;
+            break;
     }
+    return e;
 }
 
 //**************************************************************************************
@@ -38,8 +46,8 @@ GameObject::~GameObject() {}
 void GameObject::setName(std::string newName) { this->_name = newName; }
 void GameObject::setTag(std::string newTag) { this->_tag = newTag; }
 void GameObject::setType(EGameObject newType) { this->_type = newType; }
-void GameObject::setX(unsigned int x) { this->_x = x; }
-void GameObject::setY(unsigned int y) { this->_y = y; }
+void GameObject::setX(const int x) { this->_x = x; }
+void GameObject::setY(const int y) { this->_y = y; }
 void GameObject::activate(){ _bActive = true; }
 void GameObject::setChar(const char c) { this->_char = c; }
 
@@ -48,8 +56,8 @@ void GameObject::setChar(const char c) { this->_char = c; }
 std::string GameObject::getName() const { return this->_name; }
 std::string GameObject::getTag() const { return this->_tag; }
 EGameObject GameObject::getType() const { return this->_type; }
-unsigned int GameObject::getX() const { return this->_x; }
-unsigned int GameObject::getY() const { return this->_y; }
+int GameObject::getX() const { return this->_x; }
+int GameObject::getY() const { return this->_y; }
 bool GameObject::isCrashed() const { return this->_bCrashed; }
 bool GameObject::isActive() const { return _bActive; }
 char GameObject::getChar() const { return this->_char; }

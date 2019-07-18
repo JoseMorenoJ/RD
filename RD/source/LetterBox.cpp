@@ -14,6 +14,7 @@
 //Constructor
 LetterBox::LetterBox() : SideObject(params::LETTERBOX_DAMAGE, params::LETTERBOX_CASH)
 {
+    setType(EGameObject::LETTER_BOX);
 	setName("Letter Box");
     setChar('L');
 }

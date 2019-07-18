@@ -25,5 +25,6 @@ private:
 	std::vector<GameObject *> _vGameObjects; //list of Game Objects created
 
 	//Some helper functions
+    GameObject* newObject(const EGameObject& type);
 
 };
