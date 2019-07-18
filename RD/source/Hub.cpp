@@ -70,7 +70,7 @@ void Hub::displayGameObjects(ObjectPool& pool)
             _display[p->getX()][p->getY()] = p->getChar();
         }
 	}
-    for (int y = 0; y < params::SCREEN_VER; ++y)
+    for (int y = params::SCREEN_VER-1; y != 0; --y)
     {
         std::cout << "---  ";
         for (int x = 0; x < params::SCREEN_HOR; ++x)

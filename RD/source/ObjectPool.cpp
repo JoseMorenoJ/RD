@@ -43,7 +43,7 @@ std::vector<GameObject*> & ObjectPool::getvGameObjects() { return _vGameObjects;
 void ObjectPool::generateNextObject(const int aRand)
 {
 	//Choose the type depending on the aRand obtained.
-    EGameObject obj;
+    EGameObject obj = EGameObject::NO_INIT;
     for (int i=0; i < aRand; i++)
     {
         ++obj;
@@ -58,9 +58,9 @@ void ObjectPool::generateNextObject(const int aRand)
             e->activate();
             e->setY(params::SCREEN_VER);
             if(e->getType() == SEDAN || e->getType() == VAN)
-                e->setX(aRand % 3 + 1); //Start the traffic cars inside the road
+                e->setX(2); //Start the traffic cars inside the road
             if(e->getType() == LETTER_BOX || e->getType() == FIRE_HYDRANT)
-                e->setY((aRand % 2) ? 0 : params::SCREEN_HOR); //Side object in the sides
+                e->setY(0); //Side object in the sides
             break; //stop iterating
         }
     }

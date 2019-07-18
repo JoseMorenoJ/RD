@@ -31,18 +31,6 @@ void TrafficCar::setCash(int newCash) { this->_cash = newCash; }
 int TrafficCar::getDamage() const { return this->_damage; }
 int TrafficCar::getCash() const { return this->_cash; }
 
-void TrafficCar::update()
-{
-    if (getY() == 0)
-    {
-        reset();
-    }
-    else
-    {
-        setY(getY() - 1);
-    }
-}
-
 //**************************************************************************************
 //Called after a collision.
 void TrafficCar::sparks()

@@ -8,6 +8,7 @@
 #include "FireHydrant.h"
 #include "Player.h"
 #include "params.h"
+#include "GameManager.h"
 
 //**************************************************************************************
 //Constructor
@@ -20,6 +21,21 @@ FireHydrant::FireHydrant(): SideObject(params::FIREHYDRANT_DAMAGE, params::FIREH
 //**************************************************************************************
 //default Destructor
 FireHydrant::~FireHydrant() { std::cout << "~FireHydrant()" << std::endl; }
+
+void FireHydrant::update()
+{
+    if (GameManager::getInstance().CLOCK() % params::FIREHYDRANT_FREQ == 0)
+    {
+        if (getY() == 0)
+        {
+            this->reset();
+        }
+        else
+        {
+            setY(getY() - 1);
+        }
+    }
+}
 
 //**************************************************************************************
 //Specifies the behaviour when two GameObject collide

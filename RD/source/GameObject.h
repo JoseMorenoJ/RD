@@ -50,7 +50,7 @@ public:
     
     // has to be defined in the sub classes.
     virtual void onCollision(const GameObject &other) = 0;
-    virtual void update();
+    virtual void update() = 0;
     
     // an object has reached the end, disable it.
     void reset();

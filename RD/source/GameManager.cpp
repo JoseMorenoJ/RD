@@ -69,19 +69,17 @@ void GameManager::newGame()
         ++_clock;
         
 		//Generate a new object (side, traffic...)
-        if (CLOCK() % 10 == 0)
+        if (CLOCK() % params::OBJ_FREQ == 0)
             scene.addObject();
         
         //Update the objects
         pool.updateObjects();
-        player.update();
+        
+            player.update();
 
 		//Update the HUB info
 		HUB.refresh(pool, player);
-        
-        //Check the collission (money, damage, etc...)
-        scene.collide();
-        
+                
 	} //Game over
 
 	//Destroy the Scene and the objects.
@@ -90,8 +88,7 @@ void GameManager::newGame()
 	//Show result
 	HUB.refresh(pool, player);
 	HUB.showEndGame( getCash() );
-
-	return;
+    
 }
 
 //**************************************************************************************

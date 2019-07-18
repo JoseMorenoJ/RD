@@ -14,7 +14,7 @@ PlayerVehicle::PlayerVehicle()
 {
 	_name = "Sedan";
 	_handling = params::SEDAN_HANDLING;
-	_topSpeed = params::SEDAN_TOPSPEED;
+	_topSpeed = params::SEDAN_FREQ;
 	_strength = params::SEDAN_STRENGTH;
 }
 //Copy Constructor

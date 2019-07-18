@@ -8,6 +8,7 @@
 #include "LetterBox.h"
 #include "Player.h"
 #include "params.h"
+#include "GameManager.h"
 
 //**************************************************************************************
 //Constructor
@@ -20,6 +21,23 @@ LetterBox::LetterBox() : SideObject(params::LETTERBOX_DAMAGE, params::LETTERBOX_
 //**************************************************************************************
 //default Destructor
 LetterBox::~LetterBox(){ std::cout << "~LetterBox()" << std::endl; }
+
+void LetterBox::update()
+{
+    {
+        if (GameManager::getInstance().CLOCK() % params::LETTERBOX_FREQ == 0)
+        {
+            if (getY() == 0)
+            {
+                this->reset();
+            }
+            else
+            {
+                setY(getY() - 1);
+            }
+        }
+    }
+}
 
 //**************************************************************************************
 //Specifies the behaviour when two GameObject collide.

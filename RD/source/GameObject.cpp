@@ -10,18 +10,18 @@
 EGameObject operator++(EGameObject const e)
 {
     switch (e) {
-        case NO_INIT:
-            return FIRE_HYDRANT;
-        case FIRE_HYDRANT:
-            return LETTER_BOX;
-        case LETTER_BOX:
-            return SEDAN;
-        case SEDAN:
-            return VAN;
-        case VAN:
-            return NO_INIT;
+        case EGameObject::NO_INIT:
+            return EGameObject::FIRE_HYDRANT;
+        case EGameObject::FIRE_HYDRANT:
+            return EGameObject::LETTER_BOX;
+        case EGameObject::LETTER_BOX:
+            return EGameObject::SEDAN;
+        case EGameObject::SEDAN:
+            return EGameObject::VAN;
+        case EGameObject::VAN:
+            return EGameObject::FIRE_HYDRANT;
         default:
-            return NO_INIT;
+            return EGameObject::NO_INIT;
     }
 }
 
@@ -55,10 +55,6 @@ bool GameObject::isActive() const { return _bActive; }
 char GameObject::getChar() const { return this->_char; }
 
 //**************************************************************************************
-void GameObject::update()
-{
-    //If there is no complete object, do nothing.
-}
 
 void GameObject::reset()
 {

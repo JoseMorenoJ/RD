@@ -18,9 +18,7 @@ public:
 
 	int getDamage() const;
 	int getCash() const;
-    
-    void update() override;
-	
+    	
 protected:
 	void sparks();
 

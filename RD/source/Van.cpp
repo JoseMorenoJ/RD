@@ -8,6 +8,7 @@
 #include "Van.h"
 #include "Player.h"
 #include "params.h"
+#include "GameManager.h"
 
 //**************************************************************************************
 //This initializes the values with the constructor from TrafficCar
@@ -20,6 +21,21 @@ Van::Van() : TrafficCar(params::VAN_DAMAGE, params::VAN_CASH)
 //**************************************************************************************
 //default Destructor
 Van::~Van() { std::cout << "~Van()" << std::endl; }
+
+void Van::update()
+{
+    if (GameManager::getInstance().CLOCK() % params::VAN_FREQ == 0)
+    {
+        if (getY() == 0)
+        {
+            this->reset();
+        }
+        else
+        {
+            setY(getY() - 1);
+        }
+    }
+}
 
 //**************************************************************************************
 //Behaviour after a collision.

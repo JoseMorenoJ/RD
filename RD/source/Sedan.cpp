@@ -8,6 +8,7 @@
 #include "Sedan.h"
 #include "Player.h"
 #include "params.h"
+#include "GameManager.h"
 
 //**************************************************************************************
 //This initializes the values with the constructor from TrafficCar
@@ -20,6 +21,23 @@ Sedan::Sedan() : TrafficCar(params::SEDAN_DAMAGE, params::SEDAN_CASH)
 //**************************************************************************************
 //default Destructor
 Sedan::~Sedan(){ std::cout << "~Sedan()" << std::endl; }
+
+void Sedan::update()
+{
+    {
+        if (GameManager::getInstance().CLOCK() % params::SEDAN_FREQ == 0)
+        {
+            if (getY() == 0)
+            {
+                this->reset();
+            }
+            else
+            {
+                setY(getY() - 1);
+            }
+        }
+    }
+}
 
 //**************************************************************************************
 //Behaviour after a collision.

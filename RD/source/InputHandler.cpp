@@ -12,7 +12,6 @@
 
 InputHandler::InputHandler()
 {
-    //TODO instanciate the Commands
     _left = new MoveLeft;
     _right = new MoveRight;
     _up = nullptr;
