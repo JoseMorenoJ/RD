@@ -12,7 +12,7 @@ class FireHydrant :
 public:
 	FireHydrant();
 	~FireHydrant();
-
+    
 	void onCollision(const GameObject &other) override;
 
 private:

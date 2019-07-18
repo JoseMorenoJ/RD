@@ -9,6 +9,7 @@
 
 #include "ObjectPool.h"
 #include "Player.h"
+#include "params.h"
 
 class Hub
 {
@@ -22,8 +23,10 @@ public:
 
 private:
 
+    char _display[params::SCREEN_HOR][params::SCREEN_VER];
 	//Some Helper functions
 	void displayGameObjects(ObjectPool &pool);
 	void showStats(const Player &player);
+    void resetDisplay();
 
 };

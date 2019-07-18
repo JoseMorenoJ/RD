@@ -37,6 +37,7 @@ public:
     void setX(unsigned int x);
     void setY(unsigned int y);
     void activate();
+    void setChar(char const);
 
 	std::string getName() const;
 	std::string getTag() const;
@@ -45,6 +46,7 @@ public:
     unsigned int getY() const;
     bool isActive() const;
     bool isCrashed() const;
+    char getChar() const;
     
     // has to be defined in the sub classes.
     virtual void onCollision(const GameObject &other) = 0;
@@ -64,5 +66,6 @@ private:
     //Position in the grid
     unsigned int _x;
     unsigned int _y;
+    char _char;
 		
 };

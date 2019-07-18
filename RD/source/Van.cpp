@@ -14,6 +14,7 @@
 Van::Van() : TrafficCar(params::VAN_DAMAGE, params::VAN_CASH)
 {
 	setName("Van");
+    setChar('V');
 }
 
 //**************************************************************************************

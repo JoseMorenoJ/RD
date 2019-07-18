@@ -78,8 +78,6 @@ void GameManager::newGame()
 
 		//Update the HUB info
 		HUB.refresh(pool, player);
-        //Update player according to input
-		HUB.driving();
         
         //Check the collission (money, damage, etc...)
         scene.collide();

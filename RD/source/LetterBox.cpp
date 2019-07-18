@@ -14,6 +14,7 @@
 LetterBox::LetterBox() : SideObject(params::LETTERBOX_DAMAGE, params::LETTERBOX_CASH)
 {
 	setName("Letter Box");
+    setChar('L');
 }
 
 //**************************************************************************************

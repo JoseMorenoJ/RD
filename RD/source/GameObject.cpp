@@ -41,6 +41,7 @@ void GameObject::setType(EGameObject newType) { this->_type = newType; }
 void GameObject::setX(unsigned int x) { this->_x = x; }
 void GameObject::setY(unsigned int y) { this->_y = y; }
 void GameObject::activate(){ _bActive = true; }
+void GameObject::setChar(const char c) { this->_char = c; }
 
 //**************************************************************************************
 //Getters:
@@ -51,6 +52,7 @@ unsigned int GameObject::getX() const { return this->_x; }
 unsigned int GameObject::getY() const { return this->_y; }
 bool GameObject::isCrashed() const { return this->_bCrashed; }
 bool GameObject::isActive() const { return _bActive; }
+char GameObject::getChar() const { return this->_char; }
 
 //**************************************************************************************
 void GameObject::update()

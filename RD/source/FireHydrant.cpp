@@ -14,6 +14,7 @@
 FireHydrant::FireHydrant(): SideObject(params::FIREHYDRANT_DAMAGE, params::FIREHYDRANT_CASH)
 {
 	setName("Fire Hydrant");
+    setChar('F');
 }
 
 //**************************************************************************************

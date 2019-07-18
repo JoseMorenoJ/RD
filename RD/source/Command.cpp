@@ -7,15 +7,23 @@
 //
 
 #include "Command.h"
+#include "params.h"
 
 Command::~Command(){}
 
 void MoveLeft::execute(GameObject& GO)
 {
-    GO.setX( GO.getX() - 1);
+    if (GO.getX() > 0)
+    {
+        GO.setX( GO.getX() - 1);
+    }
+
 }
 
 void MoveRight::execute(GameObject& GO)
 {
-    GO.setX( GO.getX() + 1);
+    if (GO.getX() < params::SCREEN_HOR - 1)
+    {
+        GO.setX( GO.getX() + 1);
+    }
 }

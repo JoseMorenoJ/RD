@@ -62,18 +62,30 @@ void Hub::showEndGame(int tCash) const
 //TODO: Display them for real, in a position.
 void Hub::displayGameObjects(ObjectPool& pool)
 {
+    resetDisplay();
 	for (const auto *p : pool.getvGameObjects())
 	{
-		if (p != nullptr) //check that the Game Object is valid.
+		if (p->isActive()) //check that the Game Object is on screen
 		{
-            if (p->isActive()) std::cout << "\t[O]";
-            else               std::cout << "\t[X]";
-            std::cout << "x:" << p->getX() << "y:" << p->getY();
-            std::cout << p->getName();
-		}
-        std::cout << std::endl;
+            _display[p->getX()][p->getY()] = p->getChar();
+        }
 	}
-	return;
+    for (int y = 0; y < params::SCREEN_VER; ++y)
+    {
+        for (int x = 0; x < params::SCREEN_HOR; ++x)
+        {
+            if (x == params::SCREEN_HOR - 1)
+            {
+                std::cout << '|';
+            }
+            std::cout << _display[x][y] << '\t';
+            if (x == 0)
+            {
+                std::cout << '|';
+            }
+        }
+        std::cout << std::endl;
+    }
 }
 
 //**************************************************************************************
@@ -83,6 +95,13 @@ void Hub::showStats(const Player &player)
 	std::cout << "\n***************************************** Cash: $";
 	std::cout << GameManager::getInstance().getCash() << "\tHealth: ";
 	std::cout << std::max(player.getHealth(), 0) << std::endl; //Never print less than 0
-    std::cout << "pos (" << player.getX() << "," << player.getX() << ")" << std::endl;
+    std::cout << "pos (" << player.getX() << "," << player.getY() << ")" << std::endl;
+}
+
+inline void Hub::resetDisplay()
+{
+    for (int y = 0; y < params::SCREEN_VER; ++y)
+        for (int x = 0; x < params::SCREEN_HOR; ++x)
+            _display[x][y] = ' ';
 }
 

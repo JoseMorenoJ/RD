@@ -13,7 +13,8 @@
 //This initializes the values with the constructor from TrafficCar
 Sedan::Sedan() : TrafficCar(params::SEDAN_DAMAGE, params::SEDAN_CASH)
 {
-	setName("Sedan");
+    setName("Sedan");
+    setChar('S');
 }
 
 //**************************************************************************************
