@@ -6,6 +6,7 @@
 
 #include "GameObject.h"
 #include "PlayerVehicle.h"
+#include "InputHandler.h"
 
 class Player :
 	public GameObject
@@ -15,18 +16,20 @@ public:
 	Player(PlayerVehicle &vehicle);
 	~Player();
 
-	int GetHealth() const;
-	bool IsAlive() const;
+	int getHealth() const;
+	bool isAlive() const;
 
-	void Accelerate();
-	void Brake();
-	void SteerRight();
-	void SteerLeft();
+    void update();
+	void accelerate();
+	void brake();
+	void steerRight();
+	void steerLeft();
 
-	void OnCollision(const GameObject &other);
-	void ApplyDamage(int damage, int cash);
+	void onCollision(const GameObject &other);
+	void applyDamage(int damage, int cash);
 
 private:
 	PlayerVehicle _vehicle; //pointer to the player's vehicle
 	int _health; //represents the health of the player
+    InputHandler _input;
 };

@@ -13,20 +13,17 @@ public:
 	TrafficCar(int damage, int cash);
 	~TrafficCar(); 
 		
-	void SetDamage(int);
-	void SetCash(int);
-	void Crashed();
+	void setDamage(int);
+	void setCash(int);
 
-	int GetDamage() const;
-	int GetCash() const;
-	bool IsCrashed() const;
-	
+	int getDamage() const;
+	int getCash() const;
+    	
 protected:
-	void Sparks();
+	void sparks();
 
 private:
 	int _damage;   //the damage to the player car
 	int _cash;	   //cash given after crash
-	bool _bCrashed; //Wether is enabled or disabled
-		
+    
 };

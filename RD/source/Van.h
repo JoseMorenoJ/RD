@@ -12,6 +12,7 @@ class Van :
 public:
 	Van();
 	~Van();
-
-	void OnCollision(const GameObject &other) override;
+    
+    virtual void update() override;
+	void onCollision(const GameObject &other) override;
 };

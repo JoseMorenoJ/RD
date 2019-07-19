@@ -10,11 +10,9 @@
 SideObject::SideObject(int damage, int cash)
 	:_damage(damage)
 	, _cash(cash)
-	, _bCrashed(false)
 {
-	SetName("");
-	SetTag("Side Object");
-
+	setName("");
+	setTag("Side Object");
 }
 	
 //**************************************************************************************
@@ -23,12 +21,10 @@ SideObject::~SideObject(){}
 
 //**************************************************************************************
 //Setters:
-void SideObject::SetDamage(int newDamage) { this->_damage = newDamage; }
-void SideObject::SetCash(int newCash) { this->_cash = newCash; }
-void SideObject::Crashed() { this->_bCrashed = true; }
-	
+void SideObject::setDamage(int newDamage) { this->_damage = newDamage; }
+void SideObject::setCash(int newCash) { this->_cash = newCash; }
+
 //**************************************************************************************
 //Getters:
-int SideObject::GetDamage() const { return this->_damage; }
-int SideObject::GetCash() const { return this->_cash; }
-bool SideObject::IsCrashed() const { return this->_bCrashed; }
+int SideObject::getDamage() const { return this->_damage; }
+int SideObject::getCash() const { return this->_cash; }

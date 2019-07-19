@@ -22,29 +22,50 @@ typedef enum
 	VAN = 22
 }EGameObject;
 
+EGameObject nextGO(EGameObject& e);
+
 class GameObject
 {
 public:
 	//TODO: constsructor with the EGameObjectType
 	GameObject();
-	~GameObject();
+	virtual ~GameObject();
 
-	void SetName(std::string);
-	void SetTag(std::string);
-	void SetType(EGameObject);
+	void setName(std::string);
+	void setTag(std::string);
+	void setType(EGameObject);
+    void setX(const int x);
+    void setY(const int y);
+    void activate();
+    void setChar(const char);
 
-	std::string GetName() const;
-	std::string GetTag() const;
-	EGameObject GetType() const;
-
-
-	//not pure virtual: we don't want to implement OnCollision in objects that the player cannot crash with.
-	virtual void OnCollision(const GameObject &other) = 0;
+	std::string getName() const;
+	std::string getTag() const;
+	EGameObject getType() const;
+    int getX() const;
+    int getY() const;
+    bool isActive() const;
+    bool isCrashed() const;
+    char getChar() const;
+    
+    // has to be defined in the sub classes.
+    virtual void onCollision(const GameObject &other) = 0;
+    virtual void update() = 0;
+    
+    // an object has reached the end, disable it.
+    void reset();
 
 protected:
-	EGameObject _type;
+    bool _bCrashed; // if it is crashed it will give the bonus points
+
 private:
+    EGameObject _type;
 	std::string _name; //To uniquely identify a game object
 	std::string _tag;  //To uniquely identify a game object group: Traffic, Side Objects, Player.
+    bool _bActive; //Is it in or out of the screen
+    //Position in the grid
+    int _x;
+    int _y;
+    char _char;
 		
 };

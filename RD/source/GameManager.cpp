@@ -9,7 +9,6 @@
 #include "Scene.h"
 #include "Hub.h"
 
-
 //**************************************************************************************
 //default Constructor
 GameManager::GameManager(){}
@@ -19,12 +18,17 @@ GameManager::GameManager(){}
 GameManager::~GameManager(){}
 
 //**************************************************************************************
-//Getter to _cash. This cash is the total cash that the player has accumulated.
-int GameManager::GetCash() const { return this->_cashAccum; }
+//getter to _cash. This cash is the total cash that the player has accumulated.
+int GameManager::getCash() const { return this->_cashAccum; }
+
+int GameManager::CLOCK()
+{
+    return getInstance()._clock;
+}
 
 //**************************************************************************************
-//Get the instance of the game manager to be able to accumulate the cash.
-GameManager& GameManager::GetInstance()
+//get the instance of the game manager to be able to accumulate the cash.
+GameManager& GameManager::getInstance()
 {
 	//Singleton: Structure that assure only one instance of the class.
 	//Meyer's Singleton:
@@ -34,57 +38,61 @@ GameManager& GameManager::GetInstance()
 
 //**************************************************************************************
 //Add some amount to the total cash.
-void GameManager::AddCash(int amount) { this->_cashAccum += amount; }
+void GameManager::addCash(int amount) { this->_cashAccum += amount; }
 
 //**************************************************************************************
 //Generates the new game. The main loop and logic of the game.
-void GameManager::NewGame()
+void GameManager::newGame()
 {	
 	//Choose a vehicle //TODO: give a choice, actually
 	PlayerVehicle  vehicle = PlayerVehicle();
-		
+    
 	//Create a player object
 	Player player(vehicle);
 
 	//Create the pool object
-	ObjectPool *pPool = new ObjectPool();
+    ObjectPool pool{};
 	
 	//Prepare te scenary 
-	Scene scene(pPool, &player);
+	Scene scene(&pool, &player);
 
 	//Create the Hub object
 	Hub HUB;
 
-	//Set initial cash to 0
-	ResetCash();
+	//set initial cash to 0
+	resetCash();
 
 	//Run the loop
-	while (player.IsAlive())
+	while (player.isAlive())
 	{
+        //keep track of the clock
+        ++_clock;
+        
 		//Generate a new object (side, traffic...)
- 		pPool->GenerateNewPoolObject();
+        if (CLOCK() % params::OBJ_FREQ == 0)
+            scene.addObject();
+        
+        //Update the objects
+        pool.updateObjects();
+        player.update();
 
 		//Update the HUB info
-		HUB.Update(pPool, player);
-
-		HUB.Driving();
-		scene.Collide();
-
+		HUB.refresh(pool, player);
+                
 	} //Game over
 
 	//Destroy the Scene and the objects.
-	this->EndGame();
+	this->endGame();
 
 	//Show result
-	HUB.Update(pPool, player);
-	HUB.ShowEndGame( GetCash() );
-
-	return;
+	HUB.refresh(pool, player);
+	HUB.showEndGame( getCash() );
+    
 }
 
 //**************************************************************************************
 //Prints out the scores info once the game is over.
-void GameManager::EndGame()
+void GameManager::endGame()
 {
 	//TODO Implement this function
 	//Erase the instances to erase //Makes no sense to destroy it if we will play again...
@@ -97,7 +105,7 @@ void GameManager::EndGame()
 
 //**************************************************************************************
 //Asks the player to play again.
-bool GameManager::PlayAgain() //TODO Integrate the question in the HUB/Graphics
+bool GameManager::playAgain() //TODO Integrate the question in the HUB/Graphics
 {
 	char answer;
 
@@ -113,4 +121,4 @@ bool GameManager::PlayAgain() //TODO Integrate the question in the HUB/Graphics
 
 //**************************************************************************************
 //Set cash to 0 when a new game starts.
-void GameManager::ResetCash() { this->_cashAccum = 0; }
+void GameManager::resetCash() { this->_cashAccum = 0; }

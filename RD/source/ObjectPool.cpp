@@ -16,10 +16,18 @@
 
 //**************************************************************************************
 //Constructor
-ObjectPool::ObjectPool() : _engine(_rd())
+ObjectPool::ObjectPool()
 {
-	//Initialise the pool with 10 nullptrs
-	_vGameObjects = std::vector<GameObject *>(params::POOL_SIZE, nullptr);
+    _vGameObjects.push_back(new Sedan);
+    _vGameObjects.push_back(new Sedan);
+    _vGameObjects.push_back(new Sedan);
+    _vGameObjects.push_back(new Sedan);
+    _vGameObjects.push_back(new Van);
+    _vGameObjects.push_back(new Van);
+    _vGameObjects.push_back(new LetterBox);
+    _vGameObjects.push_back(new LetterBox);
+    _vGameObjects.push_back(new FireHydrant);
+    _vGameObjects.push_back(new FireHydrant);
 }
 
 //**************************************************************************************
@@ -27,51 +35,70 @@ ObjectPool::ObjectPool() : _engine(_rd())
 ObjectPool::~ObjectPool(){}
 
 //**************************************************************************************
-//Getters
-std::vector<GameObject*> & ObjectPool::GetvGameObjects() { return _vGameObjects; }
+//getters
+std::vector<GameObject*> & ObjectPool::getvGameObjects() { return _vGameObjects; }
 
 //**************************************************************************************
 //Generate the objects in the scene.
-void ObjectPool::GenerateNewPoolObject()
+void ObjectPool::generateNextObject(const int aRand)
 {
-	//Check maximum game objects at a time
-	if (this->_vGameObjects.size() >= params::POOL_SIZE)
-	{
-		if (this->_vGameObjects[0] != nullptr)
-		{
-			//Free the object from the heap
-			delete this->_vGameObjects[0];
-		}
-		this->_vGameObjects.erase(this->_vGameObjects.begin()); //Erase the pointer to the oldest item.
-	}
-	//Push back the next object.
-	this->_vGameObjects.push_back( this->GenerateNextObject() );
-
+    //aRand is 0, dont do anything.
+    if (aRand == 0) return;
+	
+    //Choose the type depending on the aRand obtained.
+    EGameObject nextObj = EGameObject::NO_INIT;
+    for (int i=0; i < aRand; i++)
+    {
+        nextGO(nextObj);
+    }
+    
+    bool objectFound = false;
+    //Look for a non active GObject of that type in the pool
+    for (auto &e: _vGameObjects)
+    {
+        if (e->getType() == nextObj && !e->isActive())
+        {
+            //Activate it and initialise its position
+            e->activate();
+            e->setY(params::SCREEN_VER);
+            if(e->getTag() == "Traffic Car")
+                e->setX(2); //Start the traffic cars inside the road
+            if(e->getTag() == "Side Object")
+                e->setX(0); //Side object in the sides
+            objectFound = true;
+            break; //stop iterating
+        }
+    }
+    if (!objectFound)
+    {
+        _vGameObjects.push_back(newObject(nextObj));
+    }
 }
 
-//**************************************************************************************
-//TODO: check what is the factory pattern and if we can use it here
-//Add the different Side Objects to the objects pool.
-GameObject * ObjectPool::GenerateNextObject()
+void ObjectPool::updateObjects()
 {
-	//Define const variables:
-	const int SWITCH_CASES = 5;
+    for(auto obj: _vGameObjects)
+    {
+        if (obj->isActive())
+        {
+            obj->update();
+        }
+    }
+}
 
-	//Generate the objects depending on the uniform distribution
-	std::uniform_int_distribution<int> dist(0, SWITCH_CASES - 1);
-	switch (dist(this->_engine))
-	{
-	case 0://NO INIT Object, nothing happens with it.
-		return nullptr;
-	case 1://FireHydrant
-		return new FireHydrant();
-	case 2: //LetterBox
-		return new LetterBox();
-	case 3://Sedan
-		return new Sedan();
-	case 4: //Van
-		return new Van();
-	default: //Just in case we get out of the range.
-		return nullptr;
-	}
+GameObject* ObjectPool::newObject(const EGameObject& type)
+{
+    //allocate a new object depending on the EGameObject type
+    switch (type) {
+        case EGameObject::FIRE_HYDRANT:
+            return new FireHydrant();
+        case EGameObject::LETTER_BOX:
+            return new LetterBox();
+        case EGameObject::SEDAN:
+            return new Sedan();
+        case EGameObject::VAN:
+            return new Van();
+        default: //it should never arrive to this point
+            return nullptr;
+    }
 }

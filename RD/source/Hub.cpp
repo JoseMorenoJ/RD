@@ -1,4 +1,3 @@
-#pragma once
 /*
 	class Hub: it displays the game information after every iteration.
 
@@ -12,6 +11,7 @@
 #include "Hub.h"
 #include "GameManager.h"
 #include "SideObject.h"
+#include "System.h"
 
 //**************************************************************************************
 //default Constructor
@@ -23,22 +23,21 @@ Hub::~Hub(){}
 
 //**************************************************************************************
 //Rewrite the screen with the new info.
-void Hub::Update(ObjectPool* pPool, Player &player)
+void Hub::refresh(ObjectPool &pool, Player &player)
 {
-	//Clear the screen
-	system("cls");
-
-	DisplayGameObjects(pPool);
+    //Clear the screen
+    System::clear();
+	displayGameObjects(pool, player);
 
 	//Show the cash from the GM and the health from the player
-	ShowStats(player);
+	showStats(player);
 
 	return;
 }
 
 //**************************************************************************************
 //Shows that the player is driving on the screen.
-void Hub::Driving() const
+void Hub::driving() const
 {
 	std::cout << "\nPlayer is driving\n";
 	for (int i = 0; i < 10; ++i)
@@ -51,7 +50,7 @@ void Hub::Driving() const
 
 //**************************************************************************************
 //Screen called after the game is over, it shows the total points obtained.
-void Hub::ShowEndGame(int tCash) const
+void Hub::showEndGame(int tCash) const
 {
 	//TODO: show a list of the crashes
 
@@ -60,32 +59,56 @@ void Hub::ShowEndGame(int tCash) const
 
 //**************************************************************************************
 //Display all the objects in the pool.
-void Hub::DisplayGameObjects(ObjectPool* pPool)
+//TODO: Display them for real, in a position.
+void Hub::displayGameObjects(ObjectPool& pool, Player& player)
 {
-	for (const auto *p : pPool->GetvGameObjects())
+    resetDisplay();
+    
+	//Game Objects
+    for (const auto *p : pool.getvGameObjects())
 	{
-		if (p != nullptr) //check that the Game Object is valid.
+		if (p->isActive()) //check that the Game Object is on screen
 		{
-			if (p->GetTag() == "Side Object")
-			{
-				std::cout << p->GetName() << "\t[X]";
-			}
-			if (p->GetTag() == "Traffic Car")
-			{
-				std::cout << "\t\t\t[O]" << p->GetName();
-			}
-		}
-		std::cout << std::endl;
+            _display[p->getX()][p->getY()] = p->getChar();
+        }
 	}
-	return;
+    
+    //Player
+    _display[player.getX()][player.getY()] = player.getChar();
+    
+    //Print all
+    for (int y = params::SCREEN_VER-1; y >= 0; --y)
+    {
+        std::cout << "---  ";
+        for (int x = 0; x < params::SCREEN_HOR; ++x)
+        {
+            if (x == params::SCREEN_HOR - 1)
+            {
+                std::cout << '|';
+            }
+            std::cout << _display[x][y] << '\t';
+            if (x == 0)
+            {
+                std::cout << '|';
+            }
+        }
+        std::cout << " ---" << std::endl;
+    }
+    std::cout << "Size of pool:" << pool.getvGameObjects().size() << std::endl;
 }
 
 //**************************************************************************************
 //Show the health points and the accumulated money of the player in the screen.
-void Hub::ShowStats(const Player &player)
+void Hub::showStats(const Player &player)
 {
-	std::cout << "\n***************************************** Cash: $";
-	std::cout << GameManager::GetInstance().GetCash() << "\tHealth: ";
-	std::cout << std::max(player.GetHealth(), 0) << std::endl; //Never print less than 0
+	std::cout << "\nCash: $" << GameManager::getInstance().getCash();
+	std::cout << "\tHealth: " << std::max(player.getHealth(), 0) << std::endl;
+}
+
+inline void Hub::resetDisplay()
+{
+    for (int y = 0; y < params::SCREEN_VER; ++y)
+        for (int x = 0; x < params::SCREEN_HOR; ++x)
+            _display[x][y] = ' ';
 }
 

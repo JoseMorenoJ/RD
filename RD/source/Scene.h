@@ -10,6 +10,7 @@
 
 #include "Player.h"
 #include "ObjectPool.h"
+#include "GameObject.h"
 
 class Scene
 {
@@ -17,14 +18,16 @@ public:
 	Scene(ObjectPool* pPool, Player* pPlayer);
 	~Scene();
 
-	void Collide();
-
+    int const getRand();
+    void addObject();
+    
 private:
 	//Necessary for a random collision generation
+    //TODO Wrap it in the cool bind() thing (p.144)
 	std::random_device _rd;
 	std::default_random_engine _engine;
 
-	ObjectPool* _pPool; //Object Pool
+    ObjectPool* _pPool; //Object Pool
 	Player* _pPlayer; //Player Car
 
 };

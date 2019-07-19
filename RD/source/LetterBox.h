@@ -12,10 +12,11 @@ class LetterBox :
 public:
 	LetterBox();
 	~LetterBox();
-
-	void OnCollision(const GameObject &other) override;
+    
+    void update() override;
+	void onCollision(const GameObject &other) override;
 
 private:
-	void LettersFlying();
+	void lettersFlying();
 
 };

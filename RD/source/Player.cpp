@@ -13,15 +13,18 @@ Player::Player()
 	: _health(params::PLAYER_INIT_HEALTH)
 {
 	_vehicle = PlayerVehicle();
-	SetName("Player");
-	SetTag("Player");
+	setName("Player");
+	setTag("Player");
+    setX(2);
+    setY(0);
 }
 Player::Player(PlayerVehicle &vehicle)
 	: _health(params::PLAYER_INIT_HEALTH)
 	, _vehicle(vehicle)
 {
-	SetName("Player");
-	SetTag("Player");
+	setName("Player");
+	setTag("Player");
+    setChar('O');
 }
 
 //**************************************************************************************
@@ -29,12 +32,12 @@ Player::Player(PlayerVehicle &vehicle)
 Player::~Player() {}
 	
 //**************************************************************************************
-//GetHealth:
-int Player::GetHealth() const { return _health; }
+//getHealth:
+int Player::getHealth() const { return _health; }
 
 //**************************************************************************************
 //Check on the players health.
-bool Player::IsAlive() const 
+bool Player::isAlive() const
 { 
 	if(_health > 0)
 		return true;
@@ -42,22 +45,31 @@ bool Player::IsAlive() const
 }
 
 //**************************************************************************************
+//Handling input
+void Player::update()
+{
+    //Add a return type here, the event (key stroke)
+    if (GameManager::getInstance().CLOCK() % params::SEDAN_HANDLING == 0) {
+        _input.handleInput(this);
+    }
+}
+//**************************************************************************************
 //Mouvement for the player relates directly with the Player Vehicle mouvement functions.
-void Player::Accelerate() { _vehicle.Up(); }
-void Player::Brake() { _vehicle.Down(); }
-void Player::SteerRight() { _vehicle.Right(); }
-void Player::SteerLeft() { _vehicle.Left(); }
+void Player::accelerate() { _vehicle.up(); }
+void Player::brake() { _vehicle.down(); }
+void Player::steerRight() { _vehicle.right(); }
+void Player::steerLeft() { _vehicle.left(); }
 
-void Player::OnCollision(const GameObject & other)
+void Player::onCollision(const GameObject & other)
 {
 	// so it compiles
 }
 
 //**************************************************************************************
 //Called when player collides with another object
-void Player::ApplyDamage(int damage, int cash)
+void Player::applyDamage(int damage, int cash)
 {
-	_health -= damage - _vehicle.GetStrength();
-	GameManager::GetInstance().AddCash(cash);
+	_health -= damage - _vehicle.getStrength();
+	GameManager::getInstance().addCash(cash);
 }
 

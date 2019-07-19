@@ -13,11 +13,11 @@
 
 int main()
 {
-	do {
-
-		GameManager::GetInstance().NewGame();
-
-	} while ( GameManager::GetInstance().PlayAgain() );
+	do
+    {
+		GameManager::getInstance().newGame();
+	}
+    while ( GameManager::getInstance().playAgain() );
 
 	std::cout << std::endl;
 	std::cout << "Thanks for playing, see you next time!" << std::endl;

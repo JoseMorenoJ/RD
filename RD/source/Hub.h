@@ -9,6 +9,7 @@
 
 #include "ObjectPool.h"
 #include "Player.h"
+#include "params.h"
 
 class Hub
 {
@@ -16,14 +17,16 @@ public:
 	Hub();
 	~Hub();
 
-	void Update(ObjectPool* pPool, Player &player);
-	void Driving() const;
-	void ShowEndGame(int) const;
+	void refresh(ObjectPool &pool, Player &player);
+	void driving() const;
+	void showEndGame(int) const;
 
 private:
-
+    char _display[params::SCREEN_HOR][params::SCREEN_VER];
+    
 	//Some Helper functions
-	void DisplayGameObjects(ObjectPool* pPool);
-	void ShowStats(const Player &player);
+	void displayGameObjects(ObjectPool &, Player &);
+	void showStats(const Player &player);
+    void resetDisplay();
 
 };

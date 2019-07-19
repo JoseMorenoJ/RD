@@ -14,7 +14,7 @@ PlayerVehicle::PlayerVehicle()
 {
 	_name = "Sedan";
 	_handling = params::SEDAN_HANDLING;
-	_topSpeed = params::SEDAN_TOPSPEED;
+	_topSpeed = params::SEDAN_FREQ;
 	_strength = params::SEDAN_STRENGTH;
 }
 //Copy Constructor
@@ -32,43 +32,43 @@ PlayerVehicle::PlayerVehicle(const PlayerVehicle &vehicle)
 PlayerVehicle::~PlayerVehicle(){}
 
 //**************************************************************************************
-//Setters:
-void PlayerVehicle::SetName(std::string newName) { this->_name = newName; }
-void PlayerVehicle::SetHandling(int newHandling) { this->_handling = newHandling; }
-void PlayerVehicle::SetTopSpeed(int newTopSpeed) { this->_topSpeed = newTopSpeed; }
-void PlayerVehicle::SetStrength(int newStrength) { this->_strength = newStrength; }
+//setters:
+void PlayerVehicle::setName(std::string newName) { this->_name = newName; }
+void PlayerVehicle::setHandling(int newHandling) { this->_handling = newHandling; }
+void PlayerVehicle::setTopSpeed(int newTopSpeed) { this->_topSpeed = newTopSpeed; }
+void PlayerVehicle::setStrength(int newStrength) { this->_strength = newStrength; }
 	
 //**************************************************************************************
-//Getters:
-std::string PlayerVehicle::GetName() const { return this->_name; }
-int PlayerVehicle::GetHandling() const { return this->_handling; }
-int PlayerVehicle::GetTopSpeed() const { return this->_topSpeed; }
-int PlayerVehicle::GetStrength() const { return this->_strength; }
+//getters:
+std::string PlayerVehicle::getName() const { return this->_name; }
+int PlayerVehicle::getHandling() const { return this->_handling; }
+int PlayerVehicle::getTopSpeed() const { return this->_topSpeed; }
+int PlayerVehicle::getStrength() const { return this->_strength; }
 
 //**************************************************************************************
 //Increases the speed of the player's car
-void PlayerVehicle::Up()
+void PlayerVehicle::up()
 {
 	return; //TODO implement Up() when using the graphics
 }
 	
 //**************************************************************************************
 //Slows down or moves backwards the player's car
-void PlayerVehicle::Down()
+void PlayerVehicle::down()
 {
 	return; //TODO implement Down() when using the graphics
 }
 
 //**************************************************************************************
 //Steer left the player's car
-void PlayerVehicle::Left()
+void PlayerVehicle::left()
 {
 	return; //TODO implement Left() when using the graphics
 }
 
 //**************************************************************************************
 //Steer's right the player's car
-void PlayerVehicle::Right()
+void PlayerVehicle::right()
 {
 	return; //TODO implement Right() when using the graphics
 }

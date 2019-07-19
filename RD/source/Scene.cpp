@@ -8,6 +8,8 @@
 #include <random>
 
 #include "Scene.h"
+#include "System.h"
+#include "params.h"
 
 //**************************************************************************************
 //Constructor: starts the random generator
@@ -22,19 +24,17 @@ Scene::Scene(ObjectPool* pPool, Player* pPlayer)
 Scene::~Scene(){}
 
 //**************************************************************************************
-//Generate a collision between the player and one of the objects in the pool.
-void Scene::Collide()
+//Generate and return a random number between the number of game object types
+int const Scene::getRand()
 {
-	//Generate a random distribution object for the collision.
-	std::uniform_int_distribution<int> dist(0, _pPool->GetvGameObjects().size()-1);
-		
-	GameObject *pGO = nullptr;
-	//Select a random object to colide
-	pGO = (_pPool->GetvGameObjects()) [dist(_engine)];
+    //Generate a random distribution object for the collision.
+    std::uniform_int_distribution<int> dist(1, 10);
+    return dist(_engine);
+}
 
-	if (pGO != nullptr)
-	{
-		pGO->OnCollision(*_pPlayer);
-		system("pause");
-	}
+//**************************************************************************************
+//Generate and return a random number between the number of game object types
+void Scene::addObject()
+{
+    _pPool->generateNextObject(getRand());
 }

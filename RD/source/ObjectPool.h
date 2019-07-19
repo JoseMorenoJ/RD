@@ -15,17 +15,16 @@ public:
 	ObjectPool();
 	~ObjectPool();
 
-	std::vector<GameObject *> &GetvGameObjects(); //cannot be const cause it returns &value
+	std::vector<GameObject *> &getvGameObjects(); //cannot be const cause it returns &value
 
-	void GenerateNewPoolObject();
-
+    void generateNextObject(const int);
+    void updateObjects();
+    
 private:
-	//Necessary for a random object generation
-	std::random_device _rd;					 //random device
-	std::default_random_engine _engine;		 //random engine
+    //TODO Make it a list of unique pointers
 	std::vector<GameObject *> _vGameObjects; //list of Game Objects created
 
 	//Some helper functions
-	GameObject * GenerateNextObject();
+    GameObject* newObject(const EGameObject& type);
 
 };

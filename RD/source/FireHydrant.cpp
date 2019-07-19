@@ -8,37 +8,55 @@
 #include "FireHydrant.h"
 #include "Player.h"
 #include "params.h"
+#include "GameManager.h"
 
 //**************************************************************************************
 //Constructor
 FireHydrant::FireHydrant(): SideObject(params::FIREHYDRANT_DAMAGE, params::FIREHYDRANT_CASH)
 {
-	SetName("Fire Hydrant");
+    setType(EGameObject::LETTER_BOX);
+	setName("Fire Hydrant");
+    setChar('F');
 }
 
 //**************************************************************************************
 //default Destructor
-FireHydrant::~FireHydrant() { std::cout << "~FireHydrant()" << std::endl; }
+FireHydrant::~FireHydrant() {}
+
+void FireHydrant::update()
+{
+    if (GameManager::getInstance().CLOCK() % params::FIREHYDRANT_FREQ == 0)
+    {
+        if (getY() == 0)
+        {
+            this->reset();
+        }
+        else
+        {
+            setY(getY() - 1);
+        }
+    }
+}
 
 //**************************************************************************************
 //Specifies the behaviour when two GameObject collide
-void FireHydrant::OnCollision(const GameObject &other)
+void FireHydrant::onCollision(const GameObject &other)
 {
-	if (other.GetName() == "Player")
+	if (other.getName() == "Player")
 	{
 		Player &p = (Player &)other;
-		if (this->IsCrashed()) //2nd collision
+		if (this->isCrashed()) //2nd collision
 		{
 			//Nothing happend in a second collision with a Side Object
-			std::cout << "### Run over a " << this->GetName() << std::endl;
+			std::cout << "### Run over a " << this->getName() << std::endl;
 		}
 		else //1st collision
 		{
 			std::cout << "### COLLISION -> Fire Hydrant" << std::endl;
-			this->Crashed();
-			this->SetName("water fountain");
-			this->Fountain();
-			p.ApplyDamage(this->GetDamage(), this->GetCash());
+			this->_bCrashed = true;
+			this->setName("water fountain");
+			this->fountain();
+			p.applyDamage(this->getDamage(), this->getCash());
 		} 
 	}
 	return;
@@ -46,7 +64,7 @@ void FireHydrant::OnCollision(const GameObject &other)
 
 //**************************************************************************************
 //
-void FireHydrant::Fountain()
+void FireHydrant::fountain()
 {
 	std::cout << "WATER FOUNTAIN FROM THE FIRE HYDRANT!!" << std::endl;
 }
